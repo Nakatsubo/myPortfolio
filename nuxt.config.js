@@ -35,6 +35,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/style-resources',
+    'nuxt-gsap-module', // https://github.com/ivodolenc/nuxt-gsap-module
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
