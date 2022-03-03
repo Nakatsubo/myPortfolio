@@ -1,0 +1,33 @@
+// -------------------------------------------
+// Color Settings
+// -------------------------------------------
+// base
+$base-color-primary: #fff;
+$base-color-secondary: #000;
+
+// text color
+$text-color-primary: #000;
+$text-color-secondary: #aaa;
+
+// background
+$color-body-background: $base-color-primary;
+
+
+// -------------------------------------------
+// Typeface Settings
+// -------------------------------------------
+// base
+$font-base-normal: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
+$font-base-bold: 'HelveticaNeue-CondensedBold', 'Helvetica Neue';
+
+
+// -------------------------------------------
+// Break Points
+// -------------------------------------------
+$breakpoints: (
+  'sm': 480px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1200px,
+  'xxl': 1440px,
+) !default;
