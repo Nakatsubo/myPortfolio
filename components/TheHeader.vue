@@ -4,27 +4,36 @@
       <component :is="isTopPage ? 'h1' : 'p'" class="header__logo">
         <nuxt-link to="/">YUSUKE NAKATSUBO</nuxt-link>
       </component>
-      <button type="button" id="js-open-drawer" class="open-drawer-btn" aria-controls="js-drawer" aria-expanded="false">
-        OPEN<span class="sr-only">メニューを開く</span>
-      </button>
+      <div class="header__menu">
+        <div class="header__menu-bg"></div>
+        <div class="header__menu-g"></div>
+      </div>
     </header>
-    <div id="js-drawer" class="drawer" aria-expanded="false">
-      <nav class="drawer-nav">
-        <ul class="drawer-nav__items">
-          <li class="drawer-nav__items--item"><a href="./">HOME</a></li>
-          <li class="drawer-nav__items--item"><a href="./">MY PORTFOLIO</a></li>
-          <li class="drawer-nav__items--item"><span>BLOG</span></li>
-          <li class="drawer-nav__items--item"><a href="./">CONTACT</a></li>
-        </ul>
-      </nav>
-      <button type="button" id="js-close-drawer" class="close-drawer-btn" aria-controls="js-drawer" aria-expanded="false">
-        CLOSE<span class="sr-only">メニューを閉じる</span>
-      </button>
+    <div class="glMenu">
+      <div class="glMenu__scroll">
+        <div class="glMenu__scroll-content">
+          <div class="menuSet">
+            <div class="menuSet__left">
+              <a href="./" class="menuSet__left--items">HOME</a>
+              <a href="./" class="menuSet__left--items">MY PORTFOLIO</a>
+              <!-- <a href="./" class="menuSet__left--items">BLOG</a> -->
+              <span class="menuSet__left--items notActive">BLOG</span>
+              <a href="./" class="menuSet__left--items">CONTACT</a>
+            </div>
+            <div class="menuSet__right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="glMenu__close">
+        <div class="glMenu__close--bg"></div>
+        <div class="glmenu__close--g"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { gsap } from 'gsap';
 export default {
   computed: {
     isTopPage() {
