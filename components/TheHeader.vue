@@ -5,8 +5,8 @@
         <nuxt-link to="/">YUSUKE NAKATSUBO</nuxt-link>
       </component>
       <div class="header__menu">
-        <div class="header__menu-bg"></div>
-        <div class="header__menu-g"></div>
+        <div class="header__menu--bg"></div>
+        <div class="header__menu--g"></div>
       </div>
     </header>
     <div class="glMenu">
@@ -49,24 +49,27 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
   &__logo {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 10px;
+    left: 10px;
   }
   &__menu {
     position: absolute;
-    top: 3.6rem;
-    right: 3.6rem;
-    width: 4.8rem;
-    height: 4.8rem;
+    top: 36px;
+    right: 36px;
+    width: 48px;
+    height: 48px;
     &--bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('images/menu_bg.png');
+      background-image: url('/menu_bg.png');
       background-size: contain;
     }
     &--g {
@@ -75,8 +78,72 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      // background-image: url('~/assets/images/menu_open.png');
+      background-image: url('/menu_open.png');
       background-size: contain;
+    }
+  }
+}
+
+.glMenu {
+  // display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: calc(var(--vh, 1vh) * 100);
+  background-image: url('/sand_w.png');
+  background-repeat: repeat;
+  background-position: 50%;
+  background-attachment: fixed;
+  backface-visibility: hidden;
+  &__scroll {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    &--content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+    } 
+  }
+}
+
+.menuSet {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  &__left {
+    width: 100%;
+    text-align: center;
+    &--items {
+      display: block;
+      font-family: $font-base-bold;
+      font-size: clamp(16px, 10vw, 100px);
+      font-weight: 700;
+      transition: 0.2s;
+      &:hover {
+        color: $text-color-secondary;
+      } 
+    }
+  }
+  &__right {
+    text-align: center;
+  }
+  @include mq() {
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 900px;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    &__left {
+      width: 642px;
     }
   }
 }
