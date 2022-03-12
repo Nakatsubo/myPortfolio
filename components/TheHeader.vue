@@ -5,8 +5,8 @@
         <nuxt-link to="/">YUSUKE NAKATSUBO</nuxt-link>
       </component>
       <div class="header__menu">
-        <div class="header__menu-bg"></div>
-        <div class="header__menu-g"></div>
+        <div class="header__menu--bg"></div>
+        <div class="header__menu--g"></div>
       </div>
     </header>
     <div class="glMenu">
@@ -20,27 +20,121 @@
               <span class="menuSet__left--items notActive">BLOG</span>
               <nuxt-link to="./" class="menuSet__left--items">CONTACT</nuxt-link>
             </div>
-            <div class="menuSet__right"></div>
+            <div class="menuSet__right">
+            </div>
           </div>
         </div>
       </div>
       <div class="glMenu__close">
         <div class="glMenu__close--bg"></div>
-        <div class="glmenu__close--g"></div>
+        <div class="glMenu__close--g"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { gsap } from 'gsap';
 export default {
   computed: {
     isTopPage() {
       if (this.$route.name === 'index') return true
       return false
     },
+    changeFillHeight() {
+      let viewWindowWidth = window.innerWidth
+      window.addEventListener('resize', () => {
+        if (viewWindowWidth === window.innerWidth) return
+        viewWindowWidth = window.innerWidth
+        setFillHeight()
+        console.log('hey')
+      })
+    },
   },
+  mounted() {
+    this.glMenu()
+  },
+  methods: {
+    setFillHeight() {
+      const VIEW_WINDOW_HEIGHT = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
+    },
+    glMenu() {
+      const gsap = this.$gsap
+      const MENU_WRAP      = document.querySelector('.glMenu'),
+            MENU_LEFT      = document.querySelector('.menuSet__left'),
+            MENU_RIGHT     = document.querySelector('.menuSet__right'),
+            OPEN_BTN_WRAP  = document.querySelector('.header__menu'),
+            OPEN_BTN       = document.querySelector('.header__menu--g'),
+            OPEN_BTN_BG    = document.querySelector('.header__menu--bg'),
+            CLOSE_BTN_WRAP = document.querySelector('.glMenu__close'),
+            CLOSE_BTN      = document.querySelector('.glMenu__close--g'),
+            CLOSE_BTN_BG   = document.querySelector('.glMenu__close--bg')
+      OPEN_BTN.addEventListener('click', () => {
+        gsap.killTweensOf(MENU_WRAP),
+        gsap.set(MENU_WRAP,
+          { display: 'block', x: '-100%' }),
+        gsap.to(MENU_WRAP,
+          .5,
+          { x: '0%', ease: 'Power3.easeIn',
+            onComplete: function(){
+              gsap.killTweensOf(CLOSE_BTN_WRAP),
+              gsap.to(CLOSE_BTN_WRAP,
+                .4, { opacity: 1, ease: 'Power3.easeOut' })
+            }
+          }
+        ),
+        gsap.killTweensOf(MENU_LEFT),
+        gsap.set(MENU_LEFT,
+          { opacity: 0 }),
+        gsap.to(MENU_LEFT,
+          .8, { delay: .6, opacity: 1, ease: 'Power3.easeOut' }),
+        gsap.killTweensOf(MENU_RIGHT),
+        gsap.set(MENU_RIGHT, { opacity: 0 }),
+        gsap.to(MENU_RIGHT,
+          .8, { delay: .7, opacity: 1, ease: 'Power3.easeOut' })
+      }),
+      OPEN_BTN.addEventListener('mouseenter', () => {
+        gsap.killTweensOf(OPEN_BTN_BG),
+        gsap.to(OPEN_BTN_BG,
+          .3, { scale: 1.3, ease: 'Power3.easeInOut' })
+      }),
+      OPEN_BTN.addEventListener('mouseleave', () => {
+        gsap.killTweensOf(OPEN_BTN_BG),
+        gsap.to(OPEN_BTN_BG,
+          .3, { scale: 1, ease: 'Power3.easeInOut' })
+      }),
+      CLOSE_BTN.addEventListener('click', () => {
+        gsap.killTweensOf(CLOSE_BTN_WRAP),
+        gsap.to(CLOSE_BTN_WRAP,
+          .3, { opacity: 0, ease: 'Power3.easeOut' }),
+        gsap.killTweensOf(MENU_LEFT),
+        gsap.to(MENU_LEFT,
+          .4, { opacity: 0, ease: 'Power3.easeOut' }),
+        gsap.killTweensOf(MENU_RIGHT),
+        gsap.to(MENU_RIGHT,
+          .4, { opacity: 0, ease: 'Power3.easeOut'}),
+        gsap.killTweensOf(MENU_WRAP),
+        gsap.to(MENU_WRAP,
+          .4,
+          { delay: .2, x: '-100%', ease: 'Power2.easeIn',
+            onComplete: function(){
+              MENU_WRAP.style.display = 'none'
+            }
+          }
+        )
+      }),
+      CLOSE_BTN.addEventListener('mouseenter', () => {
+        gsap.killTweensOf(CLOSE_BTN_BG),
+        gsap.to(CLOSE_BTN_BG,
+          .3, { scale: 1.3, ease: 'Power3.easeOut' })
+      }),
+      CLOSE_BTN.addEventListener('mouseleave', () => {
+        gsap.killTweensOf(CLOSE_BTN_BG),
+        gsap.to(CLOSE_BTN_BG,
+          .3, { scale: 1, ease: 'Power3.easeOut' })
+      })
+    },
+  }
 }
 </script>
 
@@ -49,24 +143,27 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
   &__logo {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 10px;
+    left: 10px;
   }
   &__menu {
     position: absolute;
-    top: 3.6rem;
-    right: 3.6rem;
-    width: 4.8rem;
-    height: 4.8rem;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
     &--bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('images/menu_bg.png');
+      background-image: url('/menu_bg.png');
       background-size: contain;
     }
     &--g {
@@ -75,8 +172,118 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      // background-image: url('~/assets/images/menu_open.png');
+      background-image: url('/menu_open.png');
       background-size: contain;
+    }
+  }
+  @include mq() {
+    &__menu {
+      top: 36px;
+      right: 36px;
+    }
+  }
+}
+
+.glMenu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: calc(var(--vh, 1vh) * 100);
+  background-image: url('/sand_w.png');
+  background-repeat: repeat;
+  background-position: 50%;
+  background-attachment: fixed;
+  backface-visibility: hidden;
+  z-index: 2;
+  &__scroll {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    &--content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+    } 
+  }
+  &__close {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 20px;
+    right: 20px;
+    opacity: 0;
+    &--bg {
+      position:absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url('/menu_bg.png');
+      background-size: contain;
+    }
+    &--g {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url('/menu_close.png');
+      background-size: contain;
+      cursor: pointer;
+    }
+  }
+  @include mq() {
+    &__close {
+      top: 36px;
+      right: 36px;
+    }
+  }
+}
+
+.menuSet {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 120px 0;
+  &__left {
+    width: 100%;
+    text-align: center;
+    &--items {
+      display: block;
+      font-family: $font-base-bold;
+      font-size: 14vw;
+      // font-size: clamp(14vw, 10vw, 100px);
+      font-weight: 700;
+      transition: 0.2s;
+      &:hover {
+        color: $text-color-secondary;
+      } 
+    }
+  }
+  &__right {
+    text-align: center;
+  }
+  @include mq() {
+    padding: 0;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 900px;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    &__left {
+      width: 642px;
+      &--items {
+        font-size: 8vw;
+      }
     }
   }
 }
