@@ -40,13 +40,26 @@ export default {
       if (this.$route.name === 'index') return true
       return false
     },
+    changeFillHeight() {
+      let viewWindowWidth = window.innerWidth
+      window.addEventListener('resize', () => {
+        if (viewWindowWidth === window.innerWidth) return
+        viewWindowWidth = window.innerWidth
+        setFillHeight()
+        console.log('hey')
+      })
+    },
   },
   mounted() {
     this.glMenu()
   },
   methods: {
+    setFillHeight() {
+      const VIEW_WINDOW_HEIGHT = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
+    },
     glMenu() {
-      const gsap = this.$gsap;
+      const gsap = this.$gsap
       const MENU_WRAP      = document.querySelector('.glMenu'),
             MENU_LEFT      = document.querySelector('.menuSet__left'),
             MENU_RIGHT     = document.querySelector('.menuSet__right'),
@@ -55,7 +68,7 @@ export default {
             OPEN_BTN_BG    = document.querySelector('.header__menu--bg'),
             CLOSE_BTN_WRAP = document.querySelector('.glMenu__close'),
             CLOSE_BTN      = document.querySelector('.glMenu__close--g'),
-            CLOSE_BTN_BG   = document.querySelector('.glMenu__close--bg');
+            CLOSE_BTN_BG   = document.querySelector('.glMenu__close--bg')
       OPEN_BTN.addEventListener('click', () => {
         gsap.killTweensOf(MENU_WRAP),
         gsap.set(MENU_WRAP,
@@ -119,8 +132,8 @@ export default {
         gsap.killTweensOf(CLOSE_BTN_BG),
         gsap.to(CLOSE_BTN_BG,
           .3, { scale: 1, ease: 'Power3.easeOut' })
-      });
-    }
+      })
+    },
   }
 }
 </script>
@@ -247,6 +260,7 @@ export default {
       display: block;
       font-family: $font-base-bold;
       font-size: 14vw;
+      // font-size: clamp(14vw, 10vw, 100px);
       font-weight: 700;
       transition: 0.2s;
       &:hover {
