@@ -52,4 +52,13 @@ export default {
     scss: ['~/assets/scss/app.scss'],
     hoistUseStatements: true,
   },
+  gsap: {
+    extraPlugins: {},
+    extraEases: {
+      expoScaleEase: true
+    },
+    clubPlugins: {},
+    registerEffect: [],
+    registerEase: [],
+  }
 }

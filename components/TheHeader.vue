@@ -20,20 +20,20 @@
               <span class="menuSet__left--items notActive">BLOG</span>
               <nuxt-link to="./" class="menuSet__left--items">CONTACT</nuxt-link>
             </div>
-            <div class="menuSet__right"></div>
+            <div class="menuSet__right">
+            </div>
           </div>
         </div>
       </div>
       <div class="glMenu__close">
         <div class="glMenu__close--bg"></div>
-        <div class="glmenu__close--g"></div>
+        <div class="glMenu__close--g"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { gsap } from 'gsap';
 export default {
   computed: {
     isTopPage() {
@@ -41,6 +41,87 @@ export default {
       return false
     },
   },
+  mounted() {
+    this.glMenu()
+  },
+  methods: {
+    glMenu() {
+      const gsap = this.$gsap;
+      const MENU_WRAP      = document.querySelector('.glMenu'),
+            MENU_LEFT      = document.querySelector('.menuSet__left'),
+            MENU_RIGHT     = document.querySelector('.menuSet__right'),
+            OPEN_BTN_WRAP  = document.querySelector('.header__menu'),
+            OPEN_BTN       = document.querySelector('.header__menu--g'),
+            OPEN_BTN_BG    = document.querySelector('.header__menu--bg'),
+            CLOSE_BTN_WRAP = document.querySelector('.glMenu__close'),
+            CLOSE_BTN      = document.querySelector('.glMenu__close--g'),
+            CLOSE_BTN_BG   = document.querySelector('.glMenu__close--bg');
+      OPEN_BTN.addEventListener('click', () => {
+        gsap.killTweensOf(MENU_WRAP),
+        gsap.set(MENU_WRAP,
+          { display: 'block', x: '-100%' }),
+        gsap.to(MENU_WRAP,
+          .5,
+          { x: '0%', ease: 'Power3.easeIn',
+            onComplete: function(){
+              gsap.killTweensOf(CLOSE_BTN_WRAP),
+              gsap.to(CLOSE_BTN_WRAP,
+                .4, { opacity: 1, ease: 'Power3.easeOut' })
+            }
+          }
+        ),
+        gsap.killTweensOf(MENU_LEFT),
+        gsap.set(MENU_LEFT,
+          { opacity: 0 }),
+        gsap.to(MENU_LEFT,
+          .8, { delay: .6, opacity: 1, ease: 'Power3.easeOut' }),
+        gsap.killTweensOf(MENU_RIGHT),
+        gsap.set(MENU_RIGHT, { opacity: 0 }),
+        gsap.to(MENU_RIGHT,
+          .8, { delay: .7, opacity: 1, ease: 'Power3.easeOut' })
+      }),
+      OPEN_BTN.addEventListener('mouseenter', () => {
+        gsap.killTweensOf(OPEN_BTN_BG),
+        gsap.to(OPEN_BTN_BG,
+          .3, { scale: 1.3, ease: 'Power3.easeInOut' })
+      }),
+      OPEN_BTN.addEventListener('mouseleave', () => {
+        gsap.killTweensOf(OPEN_BTN_BG),
+        gsap.to(OPEN_BTN_BG,
+          .3, { scale: 1, ease: 'Power3.easeInOut' })
+      }),
+      CLOSE_BTN.addEventListener('click', () => {
+        gsap.killTweensOf(CLOSE_BTN_WRAP),
+        gsap.to(CLOSE_BTN_WRAP,
+          .3, { opacity: 0, ease: 'Power3.easeOut' }),
+        gsap.killTweensOf(MENU_LEFT),
+        gsap.to(MENU_LEFT,
+          .4, { opacity: 0, ease: 'Power3.easeOut' }),
+        gsap.killTweensOf(MENU_RIGHT),
+        gsap.to(MENU_RIGHT,
+          .4, { opacity: 0, ease: 'Power3.easeOut'}),
+        gsap.killTweensOf(MENU_WRAP),
+        gsap.to(MENU_WRAP,
+          .4,
+          { delay: .2, x: '-100%', ease: 'Power2.easeIn',
+            onComplete: function(){
+              MENU_WRAP.style.display = 'none'
+            }
+          }
+        )
+      }),
+      CLOSE_BTN.addEventListener('mouseenter', () => {
+        gsap.killTweensOf(CLOSE_BTN_BG),
+        gsap.to(CLOSE_BTN_BG,
+          .3, { scale: 1.3, ease: 'Power3.easeOut' })
+      }),
+      CLOSE_BTN.addEventListener('mouseleave', () => {
+        gsap.killTweensOf(CLOSE_BTN_BG),
+        gsap.to(CLOSE_BTN_BG,
+          .3, { scale: 1, ease: 'Power3.easeOut' })
+      });
+    }
+  }
 }
 </script>
 
@@ -59,8 +140,8 @@ export default {
   }
   &__menu {
     position: absolute;
-    top: 36px;
-    right: 36px;
+    top: 20px;
+    right: 20px;
     width: 48px;
     height: 48px;
     &--bg {
@@ -82,10 +163,16 @@ export default {
       background-size: contain;
     }
   }
+  @include mq() {
+    &__menu {
+      top: 36px;
+      right: 36px;
+    }
+  }
 }
 
 .glMenu {
-  // display: none;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -97,6 +184,7 @@ export default {
   background-position: 50%;
   background-attachment: fixed;
   backface-visibility: hidden;
+  z-index: 2;
   &__scroll {
     width: 100%;
     height: 100%;
@@ -109,6 +197,39 @@ export default {
       min-height: 100%;
     } 
   }
+  &__close {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 20px;
+    right: 20px;
+    opacity: 0;
+    &--bg {
+      position:absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url('/menu_bg.png');
+      background-size: contain;
+    }
+    &--g {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url('/menu_close.png');
+      background-size: contain;
+      cursor: pointer;
+    }
+  }
+  @include mq() {
+    &__close {
+      top: 36px;
+      right: 36px;
+    }
+  }
 }
 
 .menuSet {
@@ -118,13 +239,14 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 120px 0;
   &__left {
     width: 100%;
     text-align: center;
     &--items {
       display: block;
       font-family: $font-base-bold;
-      font-size: clamp(16px, 10vw, 100px);
+      font-size: 14vw;
       font-weight: 700;
       transition: 0.2s;
       &:hover {
@@ -136,6 +258,7 @@ export default {
     text-align: center;
   }
   @include mq() {
+    padding: 0;
     flex-flow: row nowrap;
     justify-content: space-between;
     width: 900px;
@@ -144,6 +267,9 @@ export default {
     margin-right: auto;
     &__left {
       width: 642px;
+      &--items {
+        font-size: 8vw;
+      }
     }
   }
 }
