@@ -2,7 +2,7 @@
   <div class="root__header-wrapper">
     <header class="header">
       <component :is="isTopPage ? 'h1' : 'p'" class="header__logo">
-        <nuxt-link to="/">YUSUKE NAKATSUBO</nuxt-link>
+        <nuxt-link to="/">HOGEHOGE<br>FUGAFUGA</nuxt-link>
       </component>
       <div class="header__menu">
         <div class="header__menu--bg"></div>
@@ -45,8 +45,7 @@ export default {
       window.addEventListener('resize', () => {
         if (viewWindowWidth === window.innerWidth) return
         viewWindowWidth = window.innerWidth
-        setFillHeight()
-        console.log('hey')
+        this.setFillHeight()
       })
     },
   },
@@ -92,6 +91,7 @@ export default {
         gsap.set(MENU_RIGHT, { opacity: 0 }),
         gsap.to(MENU_RIGHT,
           .8, { delay: .7, opacity: 1, ease: 'Power3.easeOut' })
+        this.bodyScrollPrevent(true)
       }),
       OPEN_BTN.addEventListener('mouseenter', () => {
         gsap.killTweensOf(OPEN_BTN_BG),
@@ -122,6 +122,7 @@ export default {
             }
           }
         )
+        this.bodyScrollPrevent(false)
       }),
       CLOSE_BTN.addEventListener('mouseenter', () => {
         gsap.killTweensOf(CLOSE_BTN_BG),
@@ -134,6 +135,36 @@ export default {
           .3, { scale: 1, ease: 'Power3.easeOut' })
       })
     },
+    bodyScrollPrevent(flag) {
+      let tmpPosition, body = document.getElementsByTagName('body')[0]
+      let getuserAgent = window.navigator.userAgent.toLowerCase()
+      let isUserAgent = getuserAgent.indexOf('iphone') > -1 || getuserAgent.indexOf('ipad') > -1 || getuserAgent.indexOf('macintosh')>-1 && 'ontouchend' in document
+      let scrollBarWidth = window.innerWidth - document.body.clientWidth
+      if (flag) {
+        body.style.paddingRight = scrollBarWidth + 'px'
+        if (isUserAgent) {
+          tmpPosition =- window.pageYOffset,
+          body.style.position = 'fixed'
+          body.style.width = '100%'
+          body.style.top = tmpPosition +'px'
+        }
+        else {
+          body.style.overflow = 'hidden'
+        }
+      } else if (!flag) {
+        body.style.paddingRight = ''
+        if (isUserAgent) {
+          tmpPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
+          body.style.position = ''
+          body.style.width = ''
+          body.style.top = ''
+          window.scrollTo(0, tmpPosition)
+        }
+        else {
+          body.style.overflow = ''
+        }
+      }
+    },
   }
 }
 </script>
@@ -144,17 +175,22 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 1px;
   z-index: 1;
   &__logo {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
+    padding: 5px 10px;
+    background-color: $base-color-secondary;
+    font-family: $font-base-bold;
+    font-size: 2vw;
+    color: $base-color-primary;
   }
   &__menu {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 12px;
+    right: 12px;
     width: 48px;
     height: 48px;
     &--bg {
@@ -177,9 +213,14 @@ export default {
     }
   }
   @include mq() {
+    &__logo {
+      padding: 10px 15px;
+      font-size: 2vw;
+    }
     &__menu {
-      top: 36px;
-      right: 36px;
+      top: 24px;
+      right: 24px;
+      cursor: pointer;
     }
   }
 }
@@ -214,8 +255,8 @@ export default {
     position: absolute;
     width: 48px;
     height: 48px;
-    top: 20px;
-    right: 20px;
+    top: 12px;
+    right: 12px;
     opacity: 0;
     &--bg {
       position:absolute;
@@ -239,8 +280,8 @@ export default {
   }
   @include mq() {
     &__close {
-      top: 36px;
-      right: 36px;
+      top: 24px;
+      right: 24px;
     }
   }
 }
