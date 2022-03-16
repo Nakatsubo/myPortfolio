@@ -359,7 +359,7 @@ export default {
     }
     &__right {
       margin-top: 0;
-      margin-left: 80px;
+      margin-left: 34px;
       .items {
         &__text {
           font-size: 14px;
