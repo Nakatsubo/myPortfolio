@@ -11,7 +11,7 @@
     </header>
     <div class="glMenu">
       <div class="glMenu__scroll">
-        <div class="glMenu__scroll-content">
+        <div class="glMenu__scroll--content">
           <div class="menuSet">
             <div class="menuSet__left">
               <nuxt-link to="./" class="menuSet__left--items">HOME</nuxt-link>
@@ -21,6 +21,24 @@
               <nuxt-link to="./" class="menuSet__left--items">CONTACT</nuxt-link>
             </div>
             <div class="menuSet__right">
+              <div class="menuSet__right--items items">
+                <p class="items__text textEn">
+                  This site is not open to the public. It is confidential. <br>
+                  Please note that this site is not open to the public.
+                </p>
+                <p class="items__text textJa">
+                  このサイトは一般公開していません。<br>
+                  極秘とさせていただきます、予めご了承くだい。
+                </p>
+              </div>
+              <div class="headSet">
+                <span>HOGEHOHE FUGAFUGA</span>
+                <span>HOGEHOHE FUGAFUGA</span>
+                <span>HOGEHOHE FUGAFUGA</span>
+              </div>
+              <div class="items__copyright textEn">
+                <small> &copy; HOGEHOGE FUGAFUGA All rights reserved.</small>
+              </div>
             </div>
           </div>
         </div>
@@ -181,11 +199,12 @@ export default {
     position: absolute;
     top: 12px;
     left: 12px;
-    padding: 5px 10px;
+    padding: 10px 15px;
     background-color: $base-color-secondary;
     font-family: $font-base-bold;
-    font-size: 2vw;
+    font-size: 4vw;
     color: $base-color-primary;
+    letter-spacing: 1px;
   }
   &__menu {
     position: absolute;
@@ -293,6 +312,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
   padding: 120px 0;
   &__left {
     width: 100%;
@@ -301,7 +321,6 @@ export default {
       display: block;
       font-family: $font-base-bold;
       font-size: 14vw;
-      // font-size: clamp(14vw, 10vw, 100px);
       font-weight: 700;
       transition: 0.2s;
       &:hover {
@@ -310,21 +329,65 @@ export default {
     }
   }
   &__right {
+    width: 100%;
+    margin-top: 80px;
+    line-height: 1.25;
     text-align: center;
+    .items {
+      &__text {
+        margin-bottom: 10px;
+        font-size: 3vw;
+      }
+      &__copyright {
+        color: $text-color-secondary;
+      }
+    }
   }
   @include mq() {
     padding: 0;
     flex-flow: row nowrap;
-    justify-content: space-between;
-    width: 900px;
+    width: 960px;
     height: 100vh;
     margin-left: auto;
     margin-right: auto;
     &__left {
-      width: 642px;
       &--items {
-        font-size: 8vw;
+        width: 600px;
+        height: 100px;
+        font-size: 100px;
       }
+    }
+    &__right {
+      margin-top: 0;
+      margin-left: 80px;
+      .items {
+        &__text {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.headSet {
+  width: 231px;
+  margin: 40px auto 20px;
+  font-size: 24px;
+  letter-spacing: 1px;
+  span:nth-of-type(2) {
+    left: 1px;
+  }
+  span:nth-of-type(3) {
+    left: 3px;
+  }
+  @include mq() {
+    width: 266px;
+    font-size: 28px;
+    span:nth-of-type(2) {
+      left: 1px;
+    }
+    span:nth-of-type(3) {
+      left: 3px;
     }
   }
 }
