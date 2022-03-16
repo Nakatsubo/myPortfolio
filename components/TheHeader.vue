@@ -346,7 +346,7 @@ export default {
   @include mq() {
     padding: 0;
     flex-flow: row nowrap;
-    width: 960px;
+    width: 900px;
     height: 100vh;
     margin-left: auto;
     margin-right: auto;
@@ -359,7 +359,7 @@ export default {
     }
     &__right {
       margin-top: 0;
-      margin-left: 80px;
+      margin-left: 34px;
       .items {
         &__text {
           font-size: 14px;
