@@ -76,7 +76,7 @@ export default {
       document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
     },
     glMenu() {
-      const gsap = this.$gsap
+      const GSAP = this.$gsap
       const MENU_WRAP      = document.querySelector('.glMenu'),
             MENU_LEFT      = document.querySelector('.menuSet__left'),
             MENU_RIGHT     = document.querySelector('.menuSet__right'),
@@ -87,52 +87,52 @@ export default {
             CLOSE_BTN      = document.querySelector('.glMenu__close--g'),
             CLOSE_BTN_BG   = document.querySelector('.glMenu__close--bg')
       OPEN_BTN.addEventListener('click', () => {
-        gsap.killTweensOf(MENU_WRAP),
-        gsap.set(MENU_WRAP,
+        GSAP.killTweensOf(MENU_WRAP),
+        GSAP.set(MENU_WRAP,
           { display: 'block', x: '-100%' }),
-        gsap.to(MENU_WRAP,
+        GSAP.to(MENU_WRAP,
           .5,
           { x: '0%', ease: 'Power3.easeIn',
             onComplete: function(){
-              gsap.killTweensOf(CLOSE_BTN_WRAP),
-              gsap.to(CLOSE_BTN_WRAP,
+              GSAP.killTweensOf(CLOSE_BTN_WRAP),
+              GSAP.to(CLOSE_BTN_WRAP,
                 .4, { opacity: 1, ease: 'Power3.easeOut' })
             }
           }
         ),
-        gsap.killTweensOf(MENU_LEFT),
-        gsap.set(MENU_LEFT,
+        GSAP.killTweensOf(MENU_LEFT),
+        GSAP.set(MENU_LEFT,
           { opacity: 0 }),
-        gsap.to(MENU_LEFT,
+        GSAP.to(MENU_LEFT,
           .8, { delay: .6, opacity: 1, ease: 'Power3.easeOut' }),
-        gsap.killTweensOf(MENU_RIGHT),
-        gsap.set(MENU_RIGHT, { opacity: 0 }),
-        gsap.to(MENU_RIGHT,
+        GSAP.killTweensOf(MENU_RIGHT),
+        GSAP.set(MENU_RIGHT, { opacity: 0 }),
+        GSAP.to(MENU_RIGHT,
           .8, { delay: .7, opacity: 1, ease: 'Power3.easeOut' })
         this.bodyScrollPrevent(true)
       }),
       OPEN_BTN.addEventListener('mouseenter', () => {
-        gsap.killTweensOf(OPEN_BTN_BG),
-        gsap.to(OPEN_BTN_BG,
+        GSAP.killTweensOf(OPEN_BTN_BG),
+        GSAP.to(OPEN_BTN_BG,
           .3, { scale: 1.3, ease: 'Power3.easeInOut' })
       }),
       OPEN_BTN.addEventListener('mouseleave', () => {
-        gsap.killTweensOf(OPEN_BTN_BG),
-        gsap.to(OPEN_BTN_BG,
+        GSAP.killTweensOf(OPEN_BTN_BG),
+        GSAP.to(OPEN_BTN_BG,
           .3, { scale: 1, ease: 'Power3.easeInOut' })
       }),
       CLOSE_BTN.addEventListener('click', () => {
-        gsap.killTweensOf(CLOSE_BTN_WRAP),
-        gsap.to(CLOSE_BTN_WRAP,
+        GSAP.killTweensOf(CLOSE_BTN_WRAP),
+        GSAP.to(CLOSE_BTN_WRAP,
           .3, { opacity: 0, ease: 'Power3.easeOut' }),
-        gsap.killTweensOf(MENU_LEFT),
-        gsap.to(MENU_LEFT,
+        GSAP.killTweensOf(MENU_LEFT),
+        GSAP.to(MENU_LEFT,
           .4, { opacity: 0, ease: 'Power3.easeOut' }),
-        gsap.killTweensOf(MENU_RIGHT),
-        gsap.to(MENU_RIGHT,
+        GSAP.killTweensOf(MENU_RIGHT),
+        GSAP.to(MENU_RIGHT,
           .4, { opacity: 0, ease: 'Power3.easeOut'}),
-        gsap.killTweensOf(MENU_WRAP),
-        gsap.to(MENU_WRAP,
+        GSAP.killTweensOf(MENU_WRAP),
+        GSAP.to(MENU_WRAP,
           .4,
           { delay: .2, x: '-100%', ease: 'Power2.easeIn',
             onComplete: function(){
@@ -143,13 +143,13 @@ export default {
         this.bodyScrollPrevent(false)
       }),
       CLOSE_BTN.addEventListener('mouseenter', () => {
-        gsap.killTweensOf(CLOSE_BTN_BG),
-        gsap.to(CLOSE_BTN_BG,
+        GSAP.killTweensOf(CLOSE_BTN_BG),
+        GSAP.to(CLOSE_BTN_BG,
           .3, { scale: 1.3, ease: 'Power3.easeOut' })
       }),
       CLOSE_BTN.addEventListener('mouseleave', () => {
-        gsap.killTweensOf(CLOSE_BTN_BG),
-        gsap.to(CLOSE_BTN_BG,
+        GSAP.killTweensOf(CLOSE_BTN_BG),
+        GSAP.to(CLOSE_BTN_BG,
           .3, { scale: 1, ease: 'Power3.easeOut' })
       })
     },
