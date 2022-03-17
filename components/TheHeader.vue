@@ -58,16 +58,15 @@ export default {
       if (this.$route.name === 'index') return true
       return false
     },
-    changeFillHeight() {
-      let viewWindowWidth = window.innerWidth
-      window.addEventListener('resize', () => {
-        if (viewWindowWidth === window.innerWidth) return
-        viewWindowWidth = window.innerWidth
-        this.setFillHeight()
-      })
-    },
   },
   mounted() {
+    this.setFillHeight()
+    let viewWindowWidth = window.innerWidth
+    window.addEventListener('resize', () => {
+      if (viewWindowWidth === window.innerWidth) return
+      viewWindowWidth = window.innerWidth
+      this.setFillHeight()
+    })
     this.glMenu()
   },
   methods: {

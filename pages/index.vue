@@ -45,7 +45,6 @@ export default {
       if (viewWindowWidth === window.innerWidth) return
       viewWindowWidth = window.innerWidth
       this.setFillHeight()
-      console.log(viewWindowWidth)
     })
   },
   methods: {
