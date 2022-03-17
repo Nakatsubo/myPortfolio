@@ -2,25 +2,27 @@
   <div class="root__main--container">
     <div class="primaryBlock">
       <div class="primaryBlock__name">
-        <div class="textEn textEn-small">
+        <div class="primaryBlock__name--greet textEn textEn-small">
           Hello, my name is
         </div>
         <div class="headSet">
           <span>HOGEHOHE FUGAFUGA</span>
           <span>HOGEHOHE FUGAFUGA</span>
           <span>HOGEHOHE FUGAFUGA</span>
-          <span class="textEn-large">,</span>
+          <strong class="textEn-large">,</strong>
         </div>
-        <div class="textEn textEn-large">
+        <div class="primaryBlock__name--title textEn textEn-large">
           web developer
         </div>
       </div>
-      <div class="primaryBlock__role">
+      <div class="primaryBlock__position textEn">
         Web Direction / Design / Coding 
       </div>
       <div class="primaryBlock__btn">
         <div class="commonBtn textEn">
-          CONTACT ME
+          <span class="commonBtn__wrap">
+            <span class="commonBtn__wrap--text">CONTACT ME</span>
+          </span>
         </div>
       </div>
     </div>
@@ -58,8 +60,54 @@ export default {
 
 <style lang="scss" scoped>
 .primaryBlock {
+  width: 100%;
+  height: 100%;
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  &__name {
+    &--greet {
+      font-size: 16px;
+    }
+    &--title {
+      font-size: 32px;
+    }
+  }
+  &__position {
+    margin: 24px 0 48px;
+    font-size: 12px;
+    color: $text-color-secondary;
+  }
+}
+
+.headSet {
+  width: 315px;
+  margin: 16px auto 4px;
+  font-size: 32px;
+  letter-spacing: 1px;
+  span:nth-of-type(2) {
+    left: -1px;
+  }
+  span:nth-of-type(3) {
+    left: 1px;
+  }
+  strong {
+    display: inline-block;
+    margin-left: -8px;
+  }
+  @include mq() {
+    width: 266px;
+    font-size: 28px;
+    span:nth-of-type(2) {
+      left: 1px;
+    }
+    span:nth-of-type(3) {
+      left: 3px;
+    }
+  }
 }
 
 p {
