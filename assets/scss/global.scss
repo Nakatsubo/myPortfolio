@@ -17,6 +17,15 @@
   margin: -1px;
 }
 
+// common layout
+.root {
+  &__main {
+    &--container {
+      padding: 0 24px;
+    }
+  }
+}
+
 // -------------------------------------------
 // common headSet
 // -------------------------------------------
@@ -50,4 +59,40 @@
 
 .textJa {
   font-weight: 700;
+}
+
+// -------------------------------------------
+// common button
+// -------------------------------------------
+.commonBtn {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 50px;
+  background: conic-gradient(from 183deg at 50% 50%, #d6e9de 0%, #c6c6c6 5%, #e8e8e8 11%, #8a8a8a 25%, #e5c9e6 29%, #c4d8de 33%, #d29add 36%, #c8b2cc 39%, #8d8d8d 60%, #c1c1c1 76%, #c189bd 85%, #a7a786 88%, #869ab4 97%, #caded2 100%);
+  border-radius: 25px;
+  position: relative;
+  &:before {
+    content: '';
+    width: 170px;
+    height: 40px;
+    background-color: $base-color-secondary;
+    border-radius: 20px;
+    position: absolute;
+  }
+  &__wrap {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    // overflow: hidden;
+    &--text {
+      position: relative;
+      line-height: 1.0;
+      font-size: 16px;
+      color: $text-color-tertiary;
+    }
+  }
 }

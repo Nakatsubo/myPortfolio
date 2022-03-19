@@ -58,16 +58,15 @@ export default {
       if (this.$route.name === 'index') return true
       return false
     },
-    changeFillHeight() {
-      let viewWindowWidth = window.innerWidth
-      window.addEventListener('resize', () => {
-        if (viewWindowWidth === window.innerWidth) return
-        viewWindowWidth = window.innerWidth
-        this.setFillHeight()
-      })
-    },
   },
   mounted() {
+    this.setFillHeight()
+    let viewWindowWidth = window.innerWidth
+    window.addEventListener('resize', () => {
+      if (viewWindowWidth === window.innerWidth) return
+      viewWindowWidth = window.innerWidth
+      this.setFillHeight()
+    })
     this.glMenu()
   },
   methods: {
@@ -199,10 +198,10 @@ export default {
     position: absolute;
     top: 12px;
     left: 12px;
-    padding: 10px 15px;
+    padding: 5px 10px;
     background-color: $base-color-secondary;
     font-family: $font-base-bold;
-    font-size: 4vw;
+    font-size: 12px;
     color: $base-color-primary;
     letter-spacing: 1px;
   }
