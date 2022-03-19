@@ -18,13 +18,13 @@
       <div class="primaryBlock__position textEn">
         Web Direction / Design / Coding 
       </div>
-      <div class="primaryBlock__btn">
+      <nuxt-link to="./" class="primaryBlock__btn">
         <div class="commonBtn textEn">
           <span class="commonBtn__wrap">
             <span class="commonBtn__wrap--text">CONTACT ME</span>
           </span>
-        </div>
-      </div>
+        </div> 
+      </nuxt-link>
       <div class="primaryBlock__scrollBar">
         <div class="primaryBlock__scrollBar--bar"></div>
         <div class="primaryBlock__scrollBar--dot"></div>
@@ -72,7 +72,6 @@ export default {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-start;
-  // position: relative;
   &__name {
     &--greet {
       font-size: 16px;
@@ -85,6 +84,12 @@ export default {
     margin: 24px 0 48px;
     font-size: 12px;
     color: $text-color-secondary;
+  }
+  &__btn {
+    transition: 0.2s;
+    &:hover {
+      opacity: 0.6;
+    }
   }
   &__scrollBar {
     position: absolute;
