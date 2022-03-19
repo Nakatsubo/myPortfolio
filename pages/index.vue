@@ -81,10 +81,23 @@ export default {
     font-size: 12px;
     color: $text-color-secondary;
   }
+  @include mq() {
+    &__name {
+      &--greet {
+        font-size: 24px;
+      }
+      &--title {
+        font-size: 56px;
+      }
+    }
+    &__position {
+      font-size: 24px;
+    }
+  }
 }
 
 .headSet {
-  width: 315px;
+  width: 315px; // 後で変更する
   margin: 16px auto 4px;
   font-size: 32px;
   letter-spacing: 1px;
@@ -99,14 +112,8 @@ export default {
     margin-left: -8px;
   }
   @include mq() {
-    width: 266px;
-    font-size: 28px;
-    span:nth-of-type(2) {
-      left: 1px;
-    }
-    span:nth-of-type(3) {
-      left: 3px;
-    }
+    width: 529px; // 後で変更する
+    font-size: 56px;
   }
 }
 
