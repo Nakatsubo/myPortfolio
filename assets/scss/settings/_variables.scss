@@ -36,3 +36,19 @@ $breakpoints: (
   // 'xl': 1200px,
   // 'xxl': 1440px,
 ) !default;
+
+// -------------------------------------------
+// Animations
+// -------------------------------------------
+// scrollDotAnimation
+@keyframes scrollDotAnimation {
+	0% {
+    transform:translateY(-50px);
+  }
+	30% {
+    transform:translateY(-50px);
+  }
+	100% {
+    transform:translateY(66px);
+  }
+}
