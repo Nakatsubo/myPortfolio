@@ -25,6 +25,10 @@
           </span>
         </div>
       </div>
+      <div class="primaryBlock__scrollBar">
+        <div class="primaryBlock__scrollBar--bar"></div>
+        <div class="primaryBlock__scrollBar--dot"></div>
+      </div>
     </div>
 
     <div class="dummy-box">
@@ -68,6 +72,7 @@ export default {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-start;
+  // position: relative;
   &__name {
     &--greet {
       font-size: 16px;
@@ -81,6 +86,33 @@ export default {
     font-size: 12px;
     color: $text-color-secondary;
   }
+  &__scrollBar {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 21px;
+    height: 65px;
+    overflow: hidden;
+    &--bar {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      width: 1px;
+      height: 45px;
+      background-image: url('/scroll_bar.png');
+      background-size: 100% 100%;
+    }
+    &--dot {
+      position: absolute;
+      top: 0;
+      left: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background-color: $base-color-secondary;
+      animation:1s ease-out infinite scrollDotAnimation;
+    }
+  }
   @include mq() {
     &__name {
       &--greet {
@@ -93,6 +125,18 @@ export default {
     &__position {
       font-size: 24px;
     }
+  }
+}
+
+@keyframes scrollDotAnimation {
+	0% {
+    transform:translateY(-50px);
+  }
+	30% {
+    transform:translateY(-50px);
+  }
+	100% {
+    transform:translateY(66px);
   }
 }
 
