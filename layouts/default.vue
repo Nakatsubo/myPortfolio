@@ -11,6 +11,11 @@
       <div class="preLoader__bar">
         <div class="preLoader__bar--amount" />
       </div>
+      <div class="headSet preLoader__headSet">
+        <span>HOGEHOHE FUGAFUGA</span>
+        <span>HOGEHOHE FUGAFUGA</span>
+        <span>HOGEHOHE FUGAFUGA</span>
+      </div>
     </div>
   </div>
 </template>
@@ -33,18 +38,26 @@ export default {
     isLoading: async function(next, prev) {
       const GSAP = this.$gsap
       const isMobile = window.matchMedia(`screen and (max-width: ${900}px)`).matches
-      const PRELOADER = document.querySelector('.preLoader'),
-            PRELOADER_BAR = document.querySelector('.preLoader__bar')
-      
+      const PRELOADER     = document.querySelector('.preLoader'),
+            PRELOADER_BAR = document.querySelector('.preLoader__bar') 
+            // HEADSET       = document.querySelector('.headSet')
+      // console.log(HEADSET) 
       if (!next && prev) {
-        GSAP.to(PRELOADER_BAR, isMobile ? 1 : 1.5, {
-          duration: .2,
+        GSAP.to(PRELOADER_BAR, .5, {
+          delay: .5,
           opacity: 0,
-          zIndex: -1
+          zIndex: -1,
+          ease: 'Power3.easeOut'
         })
-        GSAP.to(PRELOADER, isMobile ? 1 : 1.5, {
-          duration: .2,
+        GSAP.to('.preLoader__headSet', .5, {
+          delay: .6,
           opacity: 0,
+          ease: 'Power3.easeOut'
+        })
+        GSAP.to(PRELOADER, .8, {
+          delay: .7,
+          opacity: 0,
+          ease: 'Power3.easeOut',
           onComplete: () => {
             this.isPreLoaderShow = false
           }
@@ -53,6 +66,13 @@ export default {
     }
   },
   mounted() {
+    this.setFillHeight()
+    let viewWindowWidth = window.innerWidth
+    window.addEventListener('resize', () => {
+      if (viewWindowWidth === window.innerWidth) return
+      viewWindowWidth = window.innerWidth
+      this.setFillHeight()
+    })
     window.addEventListener('load', async () => {
       this.bodyScrollPrevent(true)
       let width = 1
@@ -70,6 +90,10 @@ export default {
     setInterval(this.randambackgroundPosition, 100)
   },
   methods: {
+    setFillHeight() {
+      const VIEW_WINDOW_HEIGHT = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
+    },
     ...mapActions({
       endLoding: 'opening/endLoding'
     }),
@@ -136,21 +160,47 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   background-color: $base-color-primary;
   z-index: 99;
   // transform-origin: 0 50%;
   opacity: 1;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   &__bar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
     &--amount {
       width: 0%;
       padding: .1rem 0;
       background-color: $base-color-secondary;
+    }
+  }
+}
+
+.headSet {
+  width: 231px;
+  font-size: 24px;
+  letter-spacing: 1px;
+  span:nth-of-type(2) {
+    left: -1px;
+  }
+  span:nth-of-type(3) {
+    left: 1px;
+  }
+  @include mq() {
+    width: 266px;
+    font-size: 28px;
+    span:nth-of-type(2) {
+      left: -1px;
+    }
+    span:nth-of-type(3) {
+      left: 1px;
     }
   }
 }
