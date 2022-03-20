@@ -53,6 +53,7 @@
 
 <script>
 export default {
+  name: 'TheHeader',
   computed: {
     isTopPage() {
       if (this.$route.name === 'index') return true
