@@ -7,6 +7,7 @@
     </main>
     <TheFooter class="root__footer" />
     <div v-if="isPreLoaderShow" class="preLoader">
+      <div class="bgSand" />
       <div class="preLoader__bar">
         <div class="preLoader__bar--amount" />
       </div>
@@ -53,6 +54,7 @@ export default {
   },
   mounted() {
     window.addEventListener('load', async () => {
+      this.bodyScrollPrevent(true)
       let width = 1
       let bar = document.querySelector('.preLoader__bar--amount')
       setInterval(() => {
@@ -63,6 +65,7 @@ export default {
       }, 10)
       await this.$delay(1000)
       this.endLoding()
+      this.bodyScrollPrevent(false)
     })
     setInterval(this.randambackgroundPosition, 100)
   },
@@ -74,7 +77,37 @@ export default {
       const BG_SAND = document.querySelector('.bgSand')
       let counter = Math.ceil(80 * Math.random())
       BG_SAND.style.backgroundPosition = `${counter}% ${counter}%`;
-    }
+    },
+    bodyScrollPrevent(flag) {
+      let tmpPosition, body = document.getElementsByTagName('body')[0]
+      let getuserAgent = window.navigator.userAgent.toLowerCase()
+      let isUserAgent = getuserAgent.indexOf('iphone') > -1 || getuserAgent.indexOf('ipad') > -1 || getuserAgent.indexOf('macintosh')>-1 && 'ontouchend' in document
+      let scrollBarWidth = window.innerWidth - document.body.clientWidth
+      if (flag) {
+        body.style.paddingRight = scrollBarWidth + 'px'
+        if (isUserAgent) {
+          tmpPosition =- window.pageYOffset,
+          body.style.position = 'fixed'
+          body.style.width = '100%'
+          body.style.top = tmpPosition +'px'
+        }
+        else {
+          body.style.overflow = 'hidden'
+        }
+      } else if (!flag) {
+        body.style.paddingRight = ''
+        if (isUserAgent) {
+          tmpPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
+          body.style.position = ''
+          body.style.width = ''
+          body.style.top = ''
+          window.scrollTo(0, tmpPosition)
+        }
+        else {
+          body.style.overflow = ''
+        }
+      }
+    },
   } 
 }
 </script>
