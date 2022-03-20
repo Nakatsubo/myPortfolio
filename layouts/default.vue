@@ -1,12 +1,16 @@
 <template>
   <div class="root">
-    <div class="bgSand"></div>
+    <div class="bgSand" />
     <TheHeader class="root__header" />
     <main class="root__main">
       <Nuxt />
     </main>
     <TheFooter class="root__footer" />
-    <div v-if="isCurtainShown" class="Curtain" />
+    <div v-if="isPreLoaderShow" class="preLoader">
+      <div class="preLoader__bar">
+        <div class="preLoader__bar--amount" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,7 +20,7 @@ export default {
   name: 'default',
   data() {
     return {
-      isCurtainShown: true
+      isPreLoaderShow: true
     }
   },
   computed: {
@@ -27,19 +31,21 @@ export default {
   watch: {
     isLoading: async function(next, prev) {
       const GSAP = this.$gsap
-      const isMobile = window.matchMedia(`screen and (max-width: ${767}px)`)
-        .matches
+      const isMobile = window.matchMedia(`screen and (max-width: ${900}px)`).matches
+      const PRELOADER = document.querySelector('.preLoader'),
+            PRELOADER_BAR = document.querySelector('.preLoader__bar')
+      
       if (!next && prev) {
-        const winWidth = window.innerWidth
-        // Curtain
-        GSAP.to('.Curtain', isMobile ? 1.5 : 3, {
-          x: '-10%',
-          scaleX: 0,
-          scaleY: 1.2,
-          skewX: isMobile ? 5 : 10,
-          ease: 'Power3.easeOut',
+        GSAP.to(PRELOADER_BAR, isMobile ? 1 : 1.5, {
+          duration: .2,
+          opacity: 0,
+          zIndex: -1
+        })
+        GSAP.to(PRELOADER, isMobile ? 1 : 1.5, {
+          duration: .2,
+          opacity: 0,
           onComplete: () => {
-            this.isCurtainShown = false
+            this.isPreLoaderShow = false
           }
         })
       }
@@ -47,6 +53,14 @@ export default {
   },
   mounted() {
     window.addEventListener('load', async () => {
+      let width = 1
+      let bar = document.querySelector('.preLoader__bar--amount')
+      setInterval(() => {
+        if (width <= 100) {
+          width += 1
+          bar.style.width = width + '%'
+        }
+      }, 10)
       await this.$delay(1000)
       this.endLoding()
     })
@@ -83,14 +97,28 @@ export default {
   opacity: 0.08;
 }
 
-.Curtain {
+.preLoader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
-  z-index: 1;
-  transform-origin: 0 50%;
+  background-color: $base-color-primary;
+  z-index: 99;
+  // transform-origin: 0 50%;
+  opacity: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  &__bar {
+    width: 100%;
+    height: auto;
+    &--amount {
+      width: 0%;
+      padding: .1rem 0;
+      background-color: $base-color-secondary;
+    }
+  }
 }
 </style>
