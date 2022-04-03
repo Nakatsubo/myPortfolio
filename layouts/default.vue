@@ -67,15 +67,15 @@ export default {
     }
   },
   mounted() {
-    this.setFillHeight()
+    this.$setFillHeight()
     let viewWindowWidth = window.innerWidth
     window.addEventListener('resize', () => {
       if (viewWindowWidth === window.innerWidth) return
       viewWindowWidth = window.innerWidth
-      this.setFillHeight()
+      this.$setFillHeight()
     })
     window.addEventListener('load', async () => {
-      this.bodyScrollPrevent(true)
+      this.$bodyScrollPrevent(true)
       let width = 1
       let bar = document.querySelector('.preLoader__bar--amount')
       setInterval(() => {
@@ -86,20 +86,16 @@ export default {
       }, 10)
       await this.$delay(1000)
       this.endLoding()
-      this.bodyScrollPrevent(false)
+      this.$bodyScrollPrevent(false)
       // ファーストビューのアニメーション
       let titEffect    = document.querySelector('.titEffect')
       let isTitVisible = titEffect.classList.contains('titEffect-visible')
-      this.creareNewTitEffectContent(isTitVisible, titEffect)
+      this.$creareNewTitEffectContent(isTitVisible, titEffect)
 
     })
     setInterval(this.randambackgroundPosition, 100)
   },
   methods: {
-    setFillHeight() {
-      const VIEW_WINDOW_HEIGHT = window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
-    },
     ...mapActions({
       endLoding: 'opening/endLoding'
     }),
@@ -107,82 +103,6 @@ export default {
       const BG_SAND = document.querySelector('.bgSand')
       let counter = Math.ceil(80 * Math.random())
       BG_SAND.style.backgroundPosition = `${counter}% ${counter}%`;
-    },
-    bodyScrollPrevent(flag) {
-      let currentPosition, body = document.getElementsByTagName('body')[0]
-      let getuserAgent = window.navigator.userAgent.toLowerCase()
-      let isUserAgent = getuserAgent.indexOf('iphone') > -1 || getuserAgent.indexOf('ipad') > -1 || getuserAgent.indexOf('macintosh')>-1 && 'ontouchend' in document
-      let scrollBarWidth = window.innerWidth - document.body.clientWidth
-      if (flag) {
-        body.style.paddingRight = scrollBarWidth + 'px'
-        if (isUserAgent) {
-          currentPosition =- window.pageYOffset,
-          body.style.position = 'fixed'
-          body.style.width = '100%'
-          body.style.top = currentPosition +'px'
-        }
-        else {
-          body.style.overflow = 'hidden'
-        }
-      } else if (!flag) {
-        body.style.paddingRight = ''
-        if (isUserAgent) {
-          currentPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
-          body.style.position = ''
-          body.style.width = ''
-          body.style.top = ''
-          window.scrollTo(0, currentPosition)
-        }
-        else {
-          body.style.overflow = ''
-        }
-      }
-    },
-    creareNewTitEffectContent(bool, el) {
-      if (bool) {
-        // el.classList.add('titEffect-animated')
-        el.find('.titEffect__clone').remove()
-        el.find('.titEffect__cover').remove()
-      }
-      else {
-        let titEffectContent     = el.textContent,
-            titEffectClone       = '<span class="titEffect__clone" style="display: block; overflow: hidden; position: absolute; top: 0; left: 0; width: 100%;">'.concat(titEffectContent, '</span>'),
-            titEffectCover       = '<span class="titEffect__cover" style="display: block; overflow: hidden; position: absolute; top: 0; left: 0; width: 100%; opacity: 0.25;">'.concat(titEffectContent, '</span>'),
-            titEffectDuplication = '<span class="titEffect__detail" style="display: inline-block; opacity: 0;">'.concat(titEffectContent, '</span>')
-        el.innerHTML = titEffectDuplication.concat(titEffectClone).concat(titEffectCover)
-        this.animateNewTitEffectContent(bool, el)
-      }
-    },
-    animateNewTitEffectContent (bool, el) {
-      const GSAP = this.$gsap
-      if (!bool) {
-        let newTitEffectClone       = document.querySelector('.titEffect__clone'),
-            newTitEffectCover       = document.querySelector('.titEffect__cover'),
-            newtitEffectDuplication = document.querySelector('.titEffect__detail')
-        let elemHeight = el.offsetHeight,
-            elemWidth  = el.offsetWidth;
-        let initialCloneRect  = 'rect(0px 0px '.concat(elemHeight, 'px 0px)'),
-            archivedCloneRect = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px 0px)'),
-            initialCoverRect  = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px 0px)'),
-            archivedCoverRect = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px ').concat(elemWidth, "px)")
-        newTitEffectClone.style.clip = initialCloneRect
-        newTitEffectCover.style.clip = initialCoverRect
-        el.classList.add('titEffect-visible')
-        GSAP.to(newTitEffectClone, 2.5, {
-          clip: archivedCloneRect,
-          ease: 'Power3.easeOut',
-        })
-        GSAP.to(newTitEffectCover, 2.5, {
-          clip: archivedCoverRect,
-          ease: 'Power3.easeOut',
-          onComplete: () => {
-            // el.classList.add('titEffect-animated')
-            newtitEffectDuplication.style.opacity = 1
-            newTitEffectClone.remove()
-            newTitEffectCover.remove()
-          }
-        })
-      }
     },
   } 
 }
