@@ -74,20 +74,20 @@ export default {
       viewWindowWidth = window.innerWidth
       this.setFillHeight()
     })
-    window.addEventListener('load', async () => {
-      this.bodyScrollPrevent(true)
-      let width = 1
-      let bar = document.querySelector('.preLoader__bar--amount')
-      setInterval(() => {
-        if (width <= 100) {
-          width += 1
-          bar.style.width = width + '%'
-        }
-      }, 10)
-      await this.$delay(1000)
-      this.endLoding()
-      this.bodyScrollPrevent(false)
-    })
+    // window.addEventListener('load', async () => {
+    //   this.bodyScrollPrevent(true)
+    //   let width = 1
+    //   let bar = document.querySelector('.preLoader__bar--amount')
+    //   setInterval(() => {
+    //     if (width <= 100) {
+    //       width += 1
+    //       bar.style.width = width + '%'
+    //     }
+    //   }, 10)
+    //   await this.$delay(1000)
+    //   this.endLoding()
+    //   this.bodyScrollPrevent(false)
+    // })
     setInterval(this.randambackgroundPosition, 100)
   },
   methods: {
@@ -182,6 +182,7 @@ export default {
       background-color: $base-color-secondary;
     }
   }
+  display: none;
 }
 
 .headSet {

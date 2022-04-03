@@ -3,7 +3,9 @@
     <div class="primaryBlock">
       <div class="primaryBlock__name">
         <div class="primaryBlock__name--greet textEn textEn-small">
-          Hello, my name is
+          <span class="titEffect">
+            <span class="titEffect__detail">Hello, my name is</span>
+          </span>
         </div>
         <div class="headSet">
           <span>TOHMA KITANO</span>
@@ -31,8 +33,8 @@
       </div>
     </div>
 
-    <div class="dummy-box">
-      <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="dummy-box titEffect">
+      <p class="dummy titleeffect__detail">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -52,12 +54,59 @@ export default {
       viewWindowWidth = window.innerWidth
       this.setFillHeight()
     })
+    let titEffect    = document.querySelector('.titEffect')
+    let isTitVisible = titEffect.classList.contains('titEffect-visible')
+    this.creareNewTitEffectContent(isTitVisible, titEffect)
   },
   methods: {
     setFillHeight() {
       const VIEW_WINDOW_HEIGHT = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
     },
+    creareNewTitEffectContent(bool, el) {
+      if (bool) {
+        el.classList.add('titEffect-animated');
+        el.find('.titEffect__clone').remove();
+        el.find('.titEffect__cover').remove();
+      }
+      else {
+        let titEffectContent     = el.textContent,
+            titEffectClone       = '<span class="titEffect__clone">'.concat(titEffectContent, '</span>'),
+            titEffectCover       = '<span class="titEffect__cover">'.concat(titEffectContent, '</span>'),
+            titEffectDuplication = '<span class="titEffect__detail">'.concat(titEffectContent, '</span>');
+        el.innerHTML = titEffectDuplication.concat(titEffectClone).concat(titEffectCover);
+        this.animateNewTitEffectContent(bool, el);
+      }
+    },
+    animateNewTitEffectContent (bool, el) {
+      const GSAP = this.$gsap
+      if (!bool) {
+        let newTitEffectClone = document.querySelector('.titEffect__clone'),
+            newTitEffectCover = document.querySelector('.titEffect__cover');
+        let elemHeight = el.offsetHeight,
+            elemWidth  = el.offsetWidth;
+        let initialCloneRect  = 'rect(0px 0px '.concat(elemHeight, 'px 0px)'),
+            archivedCloneRect = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px 0px)'),
+            initialCoverRect  = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px 0px)'),
+            archivedCoverRect = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px ').concat(elemWidth, "px)");
+        newTitEffectClone.style.clip = initialCloneRect;
+        newTitEffectCover.style.clip = initialCoverRect;
+        el.classList.add('titEffect-visible');
+        GSAP.to(newTitEffectClone, 1.5, {
+          clip: archivedCloneRect,
+          ease: 'Power3.easeOut',
+        })
+        GSAP.to(newTitEffectCover, 1.5, {
+          clip: archivedCoverRect,
+          ease: 'Power3.easeOut',
+          onComplete: () => {
+            el.classList.add('titEffect-animated'),
+            newTitEffectClone.remove(),
+            newTitEffectCover.remove()
+          }
+        })
+      }
+    }
   }
 }
 </script>
@@ -167,6 +216,43 @@ export default {
       margin-left: -16px;
     }
   }
+}
+
+.titEffect {
+  backface-visibility: hidden;
+  transition: all .8s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  transition-property: transform, opacity;
+  transform: translateX(15px);
+  display: inline-block;
+  position: relative;
+  opacity: 0;
+}
+
+.titEffect__detail {
+  display: inline-block;
+  opacity: 0;
+}
+
+.titEffect__clone, .titEffect__cover {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%
+}
+
+.titEffect__cover {
+  opacity: 0.25;
+}
+
+.titEffect-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.titEffect-animated .titEffect__detail {
+  opacity: 1;
 }
 
 p {
