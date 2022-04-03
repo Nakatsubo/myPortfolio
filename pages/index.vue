@@ -121,14 +121,14 @@ export default {
   @include mq() {
     &__name {
       &--greet {
-        font-size: 32px;
+        font-size: 24px;
       }
       &--title {
-        font-size: 80px;
+        font-size: 60px;
       }
     }
     &__position {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 }
@@ -161,7 +161,7 @@ export default {
     margin-left: -8px;
   }
   @include mq() {
-    width: 528px;
+    width: 520px;
     font-size: 80px;
     strong {
       margin-left: -16px;
