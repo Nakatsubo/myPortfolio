@@ -40,7 +40,7 @@ const setFillHeight = () => {
 }
 
 // ファーストビューでテキストをアニメーションさせる
-const creareNewTitEffectContent = (bool, el) => {
+const creareNewTitEffectContent= (bool, el) => {
   if (bool) {
     el.find('.titEffect__clone').remove()
     el.find('.titEffect__cover').remove()

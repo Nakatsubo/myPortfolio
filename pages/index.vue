@@ -3,7 +3,7 @@
     <div class="primaryBlock">
       <div class="primaryBlock__name">
         <div class="primaryBlock__name--greet textEn textEn-small">
-          <span class="titEffect">
+          <span class="titEffect" id="titEffect-greet">
             <span class="titEffect__detail">Hello, my name is</span>
           </span>
         </div>
@@ -14,7 +14,9 @@
           <strong class="textEn-large">,</strong>
         </div>
         <div class="primaryBlock__name--title textEn textEn-large">
-          web developer
+          <span class="titEffect" id="titEffect-title">
+            <span class="titEffect__detail">web developer</span>
+          </span>
         </div>
       </div>
       <div class="primaryBlock__position textEn">

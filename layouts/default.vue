@@ -67,13 +67,13 @@ export default {
     }
   },
   mounted() {
-    this.$setFillHeight()
     let viewWindowWidth = window.innerWidth
     window.addEventListener('resize', () => {
       if (viewWindowWidth === window.innerWidth) return
       viewWindowWidth = window.innerWidth
       this.$setFillHeight()
     })
+    this.$setFillHeight()
     window.addEventListener('load', async () => {
       this.$bodyScrollPrevent(true)
       let width = 1
@@ -88,10 +88,12 @@ export default {
       this.endLoding()
       this.$bodyScrollPrevent(false)
       // ファーストビューのアニメーション
-      let titEffect    = document.querySelector('.titEffect')
-      let isTitVisible = titEffect.classList.contains('titEffect-visible')
-      this.$creareNewTitEffectContent(isTitVisible, titEffect)
-
+      let titEffects = document.querySelectorAll('.titEffect')
+      titEffects.forEach((titEffect) => {
+        let isTitVisible = titEffect.classList.contains('titEffect-visible')
+        this.$creareNewTitEffectContent(isTitVisible, titEffect)
+        console.log(titEffect)
+      })
     })
     setInterval(this.randambackgroundPosition, 100)
   },
