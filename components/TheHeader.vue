@@ -2,7 +2,7 @@
   <div class="root__header-wrapper">
     <header class="header">
       <component :is="isTopPage ? 'h1' : 'p'" class="header__logo">
-        <nuxt-link to="/">HOGEHOGE<br>FUGAFUGA</nuxt-link>
+        <nuxt-link to="/">TOHMA<br>KITANO</nuxt-link>
       </component>
       <div class="header__menu">
         <div class="header__menu--bg"></div>
@@ -32,12 +32,12 @@
                 </p>
               </div>
               <div class="headSet">
-                <span>HOGEHOHE FUGAFUGA</span>
-                <span>HOGEHOHE FUGAFUGA</span>
-                <span>HOGEHOHE FUGAFUGA</span>
+                <span>TOHMA KITANO</span>
+                <span>TOHMA KITANO</span>
+                <span>TOHMA KITANO</span>
               </div>
               <div class="items__copyright textEn">
-                <small> &copy; HOGEHOGE FUGAFUGA All rights reserved.</small>
+                <small> &copy; TOHMA KITANO All rights reserved.</small>
               </div>
             </div>
           </div>
@@ -53,6 +53,7 @@
 
 <script>
 export default {
+  name: 'TheHeader',
   computed: {
     isTopPage() {
       if (this.$route.name === 'index') return true
@@ -153,17 +154,17 @@ export default {
       })
     },
     bodyScrollPrevent(flag) {
-      let tmpPosition, body = document.getElementsByTagName('body')[0]
+      let currentPosition, body = document.getElementsByTagName('body')[0]
       let getuserAgent = window.navigator.userAgent.toLowerCase()
       let isUserAgent = getuserAgent.indexOf('iphone') > -1 || getuserAgent.indexOf('ipad') > -1 || getuserAgent.indexOf('macintosh')>-1 && 'ontouchend' in document
       let scrollBarWidth = window.innerWidth - document.body.clientWidth
       if (flag) {
         body.style.paddingRight = scrollBarWidth + 'px'
         if (isUserAgent) {
-          tmpPosition =- window.pageYOffset,
+          currentPosition =- window.pageYOffset,
           body.style.position = 'fixed'
           body.style.width = '100%'
-          body.style.top = tmpPosition +'px'
+          body.style.top = currentPosition +'px'
         }
         else {
           body.style.overflow = 'hidden'
@@ -171,11 +172,11 @@ export default {
       } else if (!flag) {
         body.style.paddingRight = ''
         if (isUserAgent) {
-          tmpPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
+          currentPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
           body.style.position = ''
           body.style.width = ''
           body.style.top = ''
-          window.scrollTo(0, tmpPosition)
+          window.scrollTo(0, currentPosition)
         }
         else {
           body.style.overflow = ''
@@ -369,7 +370,7 @@ export default {
 }
 
 .headSet {
-  width: 231px;
+  width: 161px;
   margin: 40px auto 20px;
   font-size: 24px;
   letter-spacing: 1px;
@@ -380,7 +381,7 @@ export default {
     left: 3px;
   }
   @include mq() {
-    width: 266px;
+    width: 185px;
     font-size: 28px;
     span:nth-of-type(2) {
       left: 1px;

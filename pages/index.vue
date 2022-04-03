@@ -3,16 +3,20 @@
     <div class="primaryBlock">
       <div class="primaryBlock__name">
         <div class="primaryBlock__name--greet textEn textEn-small">
-          Hello, my name is
+          <span class="titEffect" id="titEffect-greet">
+            <span class="titEffect__detail">Hello, my name is</span>
+          </span>
         </div>
         <div class="headSet">
-          <span>HOGEHOHE FUGAFUGA</span>
-          <span>HOGEHOHE FUGAFUGA</span>
-          <span>HOGEHOHE FUGAFUGA</span>
+          <span>TOHMA KITANO</span>
+          <span>TOHMA KITANO</span>
+          <span>TOHMA KITANO</span>
           <strong class="textEn-large">,</strong>
         </div>
         <div class="primaryBlock__name--title textEn textEn-large">
-          web developer
+          <span class="titEffect" id="titEffect-title">
+            <span class="titEffect__detail">web developer</span>
+          </span>
         </div>
       </div>
       <div class="primaryBlock__position textEn">
@@ -77,7 +81,7 @@ export default {
       font-size: 16px;
     }
     &--title {
-      font-size: 32px;
+      font-size: 40px;
     }
   }
   &__position {
@@ -124,11 +128,11 @@ export default {
         font-size: 24px;
       }
       &--title {
-        font-size: 56px;
+        font-size: 60px;
       }
     }
     &__position {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 }
@@ -146,9 +150,9 @@ export default {
 }
 
 .headSet {
-  width: 315px; // 後で変更する
+  width: 267px;
   margin: 16px auto 4px;
-  font-size: 32px;
+  font-size: 40px;
   letter-spacing: 1px;
   span:nth-of-type(2) {
     left: -1px;
@@ -161,10 +165,50 @@ export default {
     margin-left: -8px;
   }
   @include mq() {
-    width: 529px; // 後で変更する
-    font-size: 56px;
+    width: 520px;
+    font-size: 80px;
+    strong {
+      margin-left: -16px;
+    }
   }
 }
+
+.titEffect {
+  backface-visibility: hidden;
+  transition: all .8s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  transition-property: transform, opacity;
+  transform: translateX(15px);
+  display: inline-block;
+  position: relative;
+  opacity: 0;
+}
+
+// .titEffect__detail {
+//   display: inline-block;
+//   opacity: 0;
+// }
+
+// .titEffect__clone, .titEffect__cover {
+//   display: block;
+//   overflow: hidden;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%
+// }
+
+// .titEffect__cover {
+//   opacity: 0.25;
+// }
+
+.titEffect-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+// .titEffect-animated .titEffect__detail {
+//   opacity: 1;
+// }
 
 p {
   font-size: 32px !important;

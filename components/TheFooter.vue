@@ -15,6 +15,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'TheFooter'
+}
+</script>
+
 <style lang="scss" scoped>
 .footer {
   width: 100%;
