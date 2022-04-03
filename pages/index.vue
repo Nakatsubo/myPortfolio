@@ -163,6 +163,9 @@ export default {
   @include mq() {
     width: 528px;
     font-size: 80px;
+    strong {
+      margin-left: -16px;
+    }
   }
 }
 
