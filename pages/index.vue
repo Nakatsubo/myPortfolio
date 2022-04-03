@@ -65,33 +65,34 @@ export default {
     },
     creareNewTitEffectContent(bool, el) {
       if (bool) {
-        el.classList.add('titEffect-animated');
-        el.find('.titEffect__clone').remove();
-        el.find('.titEffect__cover').remove();
+        el.classList.add('titEffect-animated')
+        el.find('.titEffect__clone').remove()
+        el.find('.titEffect__cover').remove()
       }
       else {
         let titEffectContent     = el.textContent,
-            titEffectClone       = '<span class="titEffect__clone">'.concat(titEffectContent, '</span>'),
-            titEffectCover       = '<span class="titEffect__cover">'.concat(titEffectContent, '</span>'),
-            titEffectDuplication = '<span class="titEffect__detail">'.concat(titEffectContent, '</span>');
-        el.innerHTML = titEffectDuplication.concat(titEffectClone).concat(titEffectCover);
-        this.animateNewTitEffectContent(bool, el);
+            titEffectClone       = '<span class="titEffect__clone" style="display: block; overflow: hidden; position: absolute; top: 0; left: 0; width: 100%;">'.concat(titEffectContent, '</span>'),
+            titEffectCover       = '<span class="titEffect__cover" style="display: block; overflow: hidden; position: absolute; top: 0; left: 0; width: 100%; opacity: 0.25;">'.concat(titEffectContent, '</span>'),
+            titEffectDuplication = '<span class="titEffect__detail" style="display: inline-block; opacity: 0;">'.concat(titEffectContent, '</span>')
+        el.innerHTML = titEffectDuplication.concat(titEffectClone).concat(titEffectCover)
+        this.animateNewTitEffectContent(bool, el)
       }
     },
     animateNewTitEffectContent (bool, el) {
       const GSAP = this.$gsap
       if (!bool) {
-        let newTitEffectClone = document.querySelector('.titEffect__clone'),
-            newTitEffectCover = document.querySelector('.titEffect__cover');
+        let newTitEffectClone       = document.querySelector('.titEffect__clone'),
+            newTitEffectCover       = document.querySelector('.titEffect__cover'),
+            newtitEffectDuplication = document.querySelector('.titEffect__detail')
         let elemHeight = el.offsetHeight,
             elemWidth  = el.offsetWidth;
         let initialCloneRect  = 'rect(0px 0px '.concat(elemHeight, 'px 0px)'),
             archivedCloneRect = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px 0px)'),
             initialCoverRect  = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px 0px)'),
-            archivedCoverRect = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px ').concat(elemWidth, "px)");
-        newTitEffectClone.style.clip = initialCloneRect;
-        newTitEffectCover.style.clip = initialCoverRect;
-        el.classList.add('titEffect-visible');
+            archivedCoverRect = 'rect(0px '.concat(elemWidth, 'px ').concat(elemHeight, 'px ').concat(elemWidth, "px)")
+        newTitEffectClone.style.clip = initialCloneRect
+        newTitEffectCover.style.clip = initialCoverRect
+        el.classList.add('titEffect-visible')
         GSAP.to(newTitEffectClone, 1.5, {
           clip: archivedCloneRect,
           ease: 'Power3.easeOut',
@@ -100,8 +101,9 @@ export default {
           clip: archivedCoverRect,
           ease: 'Power3.easeOut',
           onComplete: () => {
-            el.classList.add('titEffect-animated'),
-            newTitEffectClone.remove(),
+            // el.classList.add('titEffect-animated')
+            newtitEffectDuplication.style.opacity = 1
+            newTitEffectClone.remove()
             newTitEffectCover.remove()
           }
         })
