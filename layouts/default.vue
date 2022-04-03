@@ -12,9 +12,9 @@
         <div class="preLoader__bar--amount" />
       </div>
       <div class="headSet preLoader__headSet">
-        <span>HOGEHOHE FUGAFUGA</span>
-        <span>HOGEHOHE FUGAFUGA</span>
-        <span>HOGEHOHE FUGAFUGA</span>
+        <span>TOHMA KITANO</span>
+        <span>TOHMA KITANO</span>
+        <span>TOHMA KITANO</span>
       </div>
     </div>
   </div>
@@ -43,18 +43,19 @@ export default {
             // HEADSET       = document.querySelector('.headSet')
       // console.log(HEADSET) 
       if (!next && prev) {
-        GSAP.to(PRELOADER_BAR, .5, {
-          delay: .5,
+        GSAP.to(PRELOADER_BAR, .3, {
+          // delay: .3,
           opacity: 0,
           zIndex: -1,
           ease: 'Power3.easeOut'
         })
-        GSAP.to('.preLoader__headSet', .5, {
-          delay: .6,
+        GSAP.to('.preLoader__headSet', .3, {
+          // delay: .3,
+          scale: 1.3,
           opacity: 0,
           ease: 'Power3.easeOut'
         })
-        GSAP.to(PRELOADER, .8, {
+        GSAP.to(PRELOADER, .7, {
           delay: .7,
           opacity: 0,
           ease: 'Power3.easeOut',
@@ -103,17 +104,17 @@ export default {
       BG_SAND.style.backgroundPosition = `${counter}% ${counter}%`;
     },
     bodyScrollPrevent(flag) {
-      let tmpPosition, body = document.getElementsByTagName('body')[0]
+      let currentPosition, body = document.getElementsByTagName('body')[0]
       let getuserAgent = window.navigator.userAgent.toLowerCase()
       let isUserAgent = getuserAgent.indexOf('iphone') > -1 || getuserAgent.indexOf('ipad') > -1 || getuserAgent.indexOf('macintosh')>-1 && 'ontouchend' in document
       let scrollBarWidth = window.innerWidth - document.body.clientWidth
       if (flag) {
         body.style.paddingRight = scrollBarWidth + 'px'
         if (isUserAgent) {
-          tmpPosition =- window.pageYOffset,
+          currentPosition =- window.pageYOffset,
           body.style.position = 'fixed'
           body.style.width = '100%'
-          body.style.top = tmpPosition +'px'
+          body.style.top = currentPosition +'px'
         }
         else {
           body.style.overflow = 'hidden'
@@ -121,11 +122,11 @@ export default {
       } else if (!flag) {
         body.style.paddingRight = ''
         if (isUserAgent) {
-          tmpPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
+          currentPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
           body.style.position = ''
           body.style.width = ''
           body.style.top = ''
-          window.scrollTo(0, tmpPosition)
+          window.scrollTo(0, currentPosition)
         }
         else {
           body.style.overflow = ''
@@ -184,24 +185,14 @@ export default {
 }
 
 .headSet {
-  width: 231px;
-  font-size: 24px;
+  width: 207px;
+  font-size: 32px;
   letter-spacing: 1px;
   span:nth-of-type(2) {
     left: -1px;
   }
   span:nth-of-type(3) {
     left: 1px;
-  }
-  @include mq() {
-    width: 266px;
-    font-size: 28px;
-    span:nth-of-type(2) {
-      left: -1px;
-    }
-    span:nth-of-type(3) {
-      left: 1px;
-    }
   }
 }
 </style>

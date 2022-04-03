@@ -6,9 +6,9 @@
           Hello, my name is
         </div>
         <div class="headSet">
-          <span>HOGEHOHE FUGAFUGA</span>
-          <span>HOGEHOHE FUGAFUGA</span>
-          <span>HOGEHOHE FUGAFUGA</span>
+          <span>TOHMA KITANO</span>
+          <span>TOHMA KITANO</span>
+          <span>TOHMA KITANO</span>
           <strong class="textEn-large">,</strong>
         </div>
         <div class="primaryBlock__name--title textEn textEn-large">
@@ -77,7 +77,7 @@ export default {
       font-size: 16px;
     }
     &--title {
-      font-size: 32px;
+      font-size: 40px;
     }
   }
   &__position {
@@ -121,10 +121,10 @@ export default {
   @include mq() {
     &__name {
       &--greet {
-        font-size: 24px;
+        font-size: 32px;
       }
       &--title {
-        font-size: 56px;
+        font-size: 80px;
       }
     }
     &__position {
@@ -146,9 +146,9 @@ export default {
 }
 
 .headSet {
-  width: 315px; // 後で変更する
+  width: 267px;
   margin: 16px auto 4px;
-  font-size: 32px;
+  font-size: 40px;
   letter-spacing: 1px;
   span:nth-of-type(2) {
     left: -1px;
@@ -161,8 +161,8 @@ export default {
     margin-left: -8px;
   }
   @include mq() {
-    width: 529px; // 後で変更する
-    font-size: 56px;
+    width: 528px;
+    font-size: 80px;
   }
 }
 
