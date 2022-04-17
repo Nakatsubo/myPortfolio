@@ -39,6 +39,7 @@ const setFillHeight = () => {
   document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
 }
 
+
 // ファーストビューでテキストをアニメーションさせる
 const creareNewTitEffectContent= (bool, el) => {
   if (bool) {
