@@ -233,7 +233,7 @@ export default {
   }
   @include mq() {
     &__logo {
-      padding: 10px 15px;
+      // padding: 10px 15px;
       font-size: 2vw;
     }
     &__menu {
@@ -353,8 +353,8 @@ export default {
     &__left {
       &--items {
         width: 600px;
-        height: 100px;
-        font-size: 100px;
+        height: 80px;
+        font-size: 80px;
       }
     }
     &__right {
