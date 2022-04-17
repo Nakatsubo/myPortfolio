@@ -3,7 +3,7 @@
     <div class="primaryBlock">
       <div class="primaryBlock__name">
         <div class="primaryBlock__name--greet textEn textEn-small">
-          <span class="titEffect" id="titEffect-greet">
+          <span class="titEffect">
             <span class="titEffect__detail">Hello, my name is</span>
           </span>
         </div>
@@ -14,13 +14,15 @@
           <strong class="textEn-large">,</strong>
         </div>
         <div class="primaryBlock__name--title textEn textEn-large">
-          <span class="titEffect" id="titEffect-title">
+          <span class="titEffect">
             <span class="titEffect__detail">web developer</span>
           </span>
         </div>
       </div>
       <div class="primaryBlock__position textEn">
-        Web Direction / Design / Coding 
+        <span class="titEffect">
+          <span class="titEffect__detail">Web Direction / Design / Coding</span>
+        </span>
       </div>
       <nuxt-link to="./" class="primaryBlock__btn">
         <div class="commonBtn textEn">
@@ -136,7 +138,6 @@ export default {
     }
   }
 }
-
 @keyframes scrollDotAnimation {
 	0% {
     transform:translateY(-50px);
@@ -148,7 +149,6 @@ export default {
     transform:translateY(66px);
   }
 }
-
 .headSet {
   width: 267px;
   margin: 16px auto 4px;
@@ -172,7 +172,6 @@ export default {
     }
   }
 }
-
 .titEffect {
   backface-visibility: hidden;
   transition: all .8s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
@@ -182,12 +181,10 @@ export default {
   position: relative;
   opacity: 0;
 }
-
 // .titEffect__detail {
 //   display: inline-block;
 //   opacity: 0;
 // }
-
 // .titEffect__clone, .titEffect__cover {
 //   display: block;
 //   overflow: hidden;
@@ -196,20 +193,16 @@ export default {
 //   left: 0;
 //   width: 100%
 // }
-
 // .titEffect__cover {
 //   opacity: 0.25;
 // }
-
 .titEffect-visible {
   transform: translateX(0);
   opacity: 1;
 }
-
 // .titEffect-animated .titEffect__detail {
 //   opacity: 1;
 // }
-
 p {
   font-size: 32px !important;
 }

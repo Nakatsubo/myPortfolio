@@ -39,6 +39,7 @@ const setFillHeight = () => {
   document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
 }
 
+
 // ファーストビューでテキストをアニメーションさせる
 const creareNewTitEffectContent= (bool, el) => {
   if (bool) {
@@ -59,9 +60,9 @@ import { gsap } from 'gsap';
 function animateNewTitEffectContent (bool, el) {
   const GSAP = gsap
   if (!bool) {
-    let newTitEffectClone       = document.querySelector('.titEffect__clone'),
-        newTitEffectCover       = document.querySelector('.titEffect__cover'),
-        newtitEffectDuplication = document.querySelector('.titEffect__detail')
+    let newTitEffectClone       = el.querySelector('.titEffect__clone'),
+        newTitEffectCover       = el.querySelector('.titEffect__cover'),
+        newtitEffectDuplication = el.querySelector('.titEffect__detail')
     let elemHeight = el.offsetHeight,
         elemWidth  = el.offsetWidth;
     let initialCloneRect  = 'rect(0px 0px '.concat(elemHeight, 'px 0px)'),
@@ -71,11 +72,11 @@ function animateNewTitEffectContent (bool, el) {
     newTitEffectClone.style.clip = initialCloneRect
     newTitEffectCover.style.clip = initialCoverRect
     el.classList.add('titEffect-visible')
-    GSAP.to(newTitEffectClone, 2.5, {
+    GSAP.to(newTitEffectClone, 3, {
       clip: archivedCloneRect,
       ease: 'Power3.easeOut',
     })
-    GSAP.to(newTitEffectCover, 2.5, {
+    GSAP.to(newTitEffectCover, 3, {
       clip: archivedCoverRect,
       ease: 'Power3.easeOut',
       onComplete: () => {
@@ -86,7 +87,6 @@ function animateNewTitEffectContent (bool, el) {
     })
   }
 }
-
 
 export default (context, inject) => {  
   inject('delay', delay)

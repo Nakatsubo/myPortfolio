@@ -87,13 +87,8 @@ export default {
       await this.$delay(1000)
       this.endLoding()
       this.$bodyScrollPrevent(false)
-      // ファーストビューのアニメーション
-      let titEffects = document.querySelectorAll('.titEffect')
-      titEffects.forEach((titEffect) => {
-        let isTitVisible = titEffect.classList.contains('titEffect-visible')
-        this.$creareNewTitEffectContent(isTitVisible, titEffect)
-        console.log(titEffect)
-      })
+      let titEffects = document.getElementsByClassName('titEffect')
+      this.firstViewAnimation(titEffects)
     })
     setInterval(this.randambackgroundPosition, 100)
   },
@@ -106,6 +101,12 @@ export default {
       let counter = Math.ceil(80 * Math.random())
       BG_SAND.style.backgroundPosition = `${counter}% ${counter}%`;
     },
+    firstViewAnimation(arr) {
+      for (const titEffect of arr) {
+        let isTitVisible = titEffect.classList.contains('titEffect-visible')
+        this.$creareNewTitEffectContent(isTitVisible, titEffect)
+      }
+    }
   } 
 }
 </script>
@@ -115,7 +116,6 @@ export default {
   width: 100%;
   height: 100%;
 }
-
 .bgSand {
   position: fixed;
   top: 0;
@@ -127,7 +127,6 @@ export default {
   background-position: 50%;
   opacity: 0.08;
 }
-
 .preLoader {
   position: fixed;
   top: 0;
@@ -156,7 +155,6 @@ export default {
     }
   }
 }
-
 .headSet {
   width: 207px;
   font-size: 32px;
