@@ -87,16 +87,8 @@ export default {
       await this.$delay(1000)
       this.endLoding()
       this.$bodyScrollPrevent(false)
-      // ファーストビューのアニメーション
-      // let titEffects = document.querySelectorAll('.titEffect')
-      // titEffects.forEach((titEffect) => {
-      //   let isTitVisible = titEffect.classList.contains('titEffect-visible')
-      //   this.$creareNewTitEffectContent(isTitVisible, titEffect)
-      //   console.log(titEffect)
-      // })
-      let titEffect = document.querySelector('.titEffect')
-      let isTitVisible = titEffect.classList.contains('titEffect-visible')
-      this.$creareNewTitEffectContent(isTitVisible, titEffect)
+      let titEffects = document.getElementsByClassName('titEffect')
+      this.firstViewAnimation(titEffects)
     })
     setInterval(this.randambackgroundPosition, 100)
   },
@@ -109,6 +101,12 @@ export default {
       let counter = Math.ceil(80 * Math.random())
       BG_SAND.style.backgroundPosition = `${counter}% ${counter}%`;
     },
+    firstViewAnimation(arr) {
+      for (const titEffect of arr) {
+        let isTitVisible = titEffect.classList.contains('titEffect-visible')
+        this.$creareNewTitEffectContent(isTitVisible, titEffect)
+      }
+    }
   } 
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="primaryBlock">
       <div class="primaryBlock__name">
         <div class="primaryBlock__name--greet textEn textEn-small">
-          <span class="titEffect" id="titEffect-greet">
+          <span class="titEffect">
             <span class="titEffect__detail">Hello, my name is</span>
           </span>
         </div>
@@ -14,13 +14,15 @@
           <strong class="textEn-large">,</strong>
         </div>
         <div class="primaryBlock__name--title textEn textEn-large">
-          <span class="titEffect" id="titEffect-title">
+          <span class="titEffect">
             <span class="titEffect__detail">web developer</span>
           </span>
         </div>
       </div>
       <div class="primaryBlock__position textEn">
-        Web Direction / Design / Coding 
+        <span class="titEffect">
+          <span class="titEffect__detail">Web Direction / Design / Coding</span>
+        </span>
       </div>
       <nuxt-link to="./" class="primaryBlock__btn">
         <div class="commonBtn textEn">
