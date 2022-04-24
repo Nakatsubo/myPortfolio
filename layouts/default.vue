@@ -104,7 +104,7 @@ export default {
     firstViewAnimation(arr) {
       for (const titEffect of arr) {
         let isTitVisible = titEffect.classList.contains('titEffect-visible')
-        this.$creareNewTitEffectContent(isTitVisible, titEffect)
+        this.$creareFirstViewTitEffectContent(isTitVisible, titEffect)
       }
     }
   } 
