@@ -1,6 +1,7 @@
 <template>
   <div class="root">
     <div class="bgSand" />
+    <canvas class="canvas"></canvas>
     <TheHeader class="root__header" />
     <main class="root__main">
       <Nuxt />
@@ -90,6 +91,7 @@ export default {
       let titEffects = document.getElementsByClassName('titEffect')
       this.firstViewAnimation(titEffects)
     })
+    this.$oscillator(false)
     setInterval(this.randambackgroundPosition, 100)
   },
   methods: {
@@ -104,7 +106,7 @@ export default {
     firstViewAnimation(arr) {
       for (const titEffect of arr) {
         let isTitVisible = titEffect.classList.contains('titEffect-visible')
-        this.$creareNewTitEffectContent(isTitVisible, titEffect)
+        this.$creareFirstViewTitEffectContent(isTitVisible, titEffect)
       }
     }
   } 
@@ -165,5 +167,11 @@ export default {
   span:nth-of-type(3) {
     left: 1px;
   }
+}
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 </style>
