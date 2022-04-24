@@ -109,7 +109,7 @@ export default {
         GSAP.set(MENU_RIGHT, { opacity: 0 }),
         GSAP.to(MENU_RIGHT,
           .8, { delay: .7, opacity: 1, ease: 'Power3.easeOut' })
-        this.bodyScrollPrevent(true)
+        this.$bodyScrollPrevent(true)
       }),
       OPEN_BTN.addEventListener('mouseenter', () => {
         GSAP.killTweensOf(OPEN_BTN_BG),
@@ -140,7 +140,7 @@ export default {
             }
           }
         )
-        this.bodyScrollPrevent(false)
+        this.$bodyScrollPrevent(false)
       }),
       CLOSE_BTN.addEventListener('mouseenter', () => {
         GSAP.killTweensOf(CLOSE_BTN_BG),
@@ -152,36 +152,6 @@ export default {
         GSAP.to(CLOSE_BTN_BG,
           .3, { scale: 1, ease: 'Power3.easeOut' })
       })
-    },
-    bodyScrollPrevent(flag) {
-      let currentPosition, body = document.getElementsByTagName('body')[0]
-      let getuserAgent = window.navigator.userAgent.toLowerCase()
-      let isUserAgent = getuserAgent.indexOf('iphone') > -1 || getuserAgent.indexOf('ipad') > -1 || getuserAgent.indexOf('macintosh')>-1 && 'ontouchend' in document
-      let scrollBarWidth = window.innerWidth - document.body.clientWidth
-      if (flag) {
-        body.style.paddingRight = scrollBarWidth + 'px'
-        if (isUserAgent) {
-          currentPosition =- window.pageYOffset,
-          body.style.position = 'fixed'
-          body.style.width = '100%'
-          body.style.top = currentPosition +'px'
-        }
-        else {
-          body.style.overflow = 'hidden'
-        }
-      } else if (!flag) {
-        body.style.paddingRight = ''
-        if (isUserAgent) {
-          currentPosition = parseInt(body.style.top.replace(/[^0-9]/g,''))
-          body.style.position = ''
-          body.style.width = ''
-          body.style.top = ''
-          window.scrollTo(0, currentPosition)
-        }
-        else {
-          body.style.overflow = ''
-        }
-      }
     },
   }
 }
