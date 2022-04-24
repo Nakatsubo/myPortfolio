@@ -88,7 +88,7 @@ function animateFirstViewTitEffectContent (bool, el) {
 }
 
 // ポインターをアニメーションさせる
-const oscillator = (remove) => {
+const mouseStalker = (remove) => {
   if(!remove) {
     let ctx, hue, logo, form, buffer,
         target   = {},
@@ -325,6 +325,6 @@ export default (context, inject) => {
   inject('delay', delay)
   inject('bodyScrollPrevent', bodyScrollPrevent)
   inject('setFillHeight', setFillHeight)
-  inject('oscillator', oscillator)
   inject('creareFirstViewTitEffectContent', creareFirstViewTitEffectContent)
+  inject('mouseStalker', mouseStalker)
 }

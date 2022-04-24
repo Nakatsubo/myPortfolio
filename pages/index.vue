@@ -1,5 +1,6 @@
 <template>
   <div class="root__main--container">
+
     <div class="primaryBlock">
       <div class="primaryBlock__name">
         <div class="primaryBlock__name--greet textEn textEn-small">
@@ -37,6 +38,53 @@
       </div>
     </div>
 
+    <div class="secondaryBlock"></div>
+
+    <div class="tertiaryBlock">
+      <div class="tertiaryBlock__heading headSet">
+        <span>SKILLS & EXPERIENCE</span>
+        <span>SKILLS & EXPERIENCE</span>
+        <span>SKILLS & EXPERIENCE</span>
+      </div>
+      <div class="tertiaryBlock__contents">
+        <div class="tertiaryBlock__contents--left"></div>
+        <div class="tertiaryBlock__contents--right">
+          <div class="tagCanvasContainer">
+            <canvas width="500" height="500" id="myCanvas">
+              <ul>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank">HTML</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/CSS" target="_blank">CSS</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Sass" target="_blank">Sass</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JavaScript" target="_blank">ES5/ES6</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JQuery" target="_blank">jQuery</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Node.js" target="_blank">Node.js</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Vue.js" target="_blank">Vue.js</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Nuxt.js" target="_blank">Nuxt.js</a></li>
+                <li><a data-weight="20" href="#" target="_blank">Gulp.js</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/JavaScript_Object_Notation" target="_blank">JSON</a></li>
+                <li><a data-weight="16" href="#" target="_blank">GSAP</a></li>
+                <li><a data-weight="16" href="https://ja.wikipedia.org/wiki/Google_Apps_Script" target="_blank">Google Apps Script</a></li>
+                <li><a data-weight="16" href="#" target="_blank">JAM STACK</a></li>
+                <li><a data-weight="12" href="https://ja.wikipedia.org/wiki/Webpack" target="_blank">webpack</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/WordPress" target="_blank">WordPress</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/Movable_Type" target="_blank">Movable Type</a></li>
+                <li><a data-weight="20" href="hhttps://ja.wikipedia.org/wiki/PHP_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" target="_blank">PHP</a></li>
+                <li><a data-weight="16" href="https://ja.wikipedia.org/wiki/Ruby" target="_blank">Ruby</a></li>
+                <li><a data-weight="16" href="https://ja.wikipedia.org/wiki/Ruby_on_Rails" target="_blank">Ruby on Rails</a></li>
+                <li><a data-weight="26" href="https://ja.wikipedia.org/wiki/SQL" target="_blank">SQL</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Git" target="_blank">Git</a></li>
+                <li><a data-weight="16" href="hhttps://ja.wikipedia.org/wiki/Docker" target="_blank">Docker</a></li>
+                <li><a data-weight="12" href="https://ja.wikipedia.org/wiki/Python" target="_blank">Python</a></li>
+              </ul>
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quaternaryBlock"></div>
+
     <div class="dummy-box">
       <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -51,19 +99,35 @@
 export default {
   name: 'IndexPage',
   mounted() {
-    this.setFillHeight()
+    this.$setFillHeight()
     let viewWindowWidth = window.innerWidth
     window.addEventListener('resize', () => {
       if (viewWindowWidth === window.innerWidth) return
       viewWindowWidth = window.innerWidth
-      this.setFillHeight()
+      this.$setFillHeight()
     })
+    this.tagCanvas()
   },
   methods: {
-    setFillHeight() {
-      const VIEW_WINDOW_HEIGHT = window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
-    },
+    tagCanvas() {
+      let options = {
+          depth: 1.1,
+          fadeIn: 3000,
+          freezeActive: true,
+          freezeDecel: true,
+          initial: [0.3, -0.1],
+          maxSpeed: 0.06,
+          noSelect: true,
+          shuffleTags: true,
+          shape: 'sphere',
+          textColour: '#000000',
+          textFont: null,
+          zoom: 0.8,
+          pinchZoom: true,
+          wheelZoom: false,
+      }
+      TagCanvas.Start('myCanvas', '', options);
+    }
   }
 }
 </script>
