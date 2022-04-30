@@ -48,7 +48,9 @@
       </div>
       <div class="tertiaryBlock__contents">
         <div class="tertiaryBlock__contents--left">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo a doloribus quam consequatur reprehenderit, iure explicabo consequuntur, sequi ratione maiores expedita officiis delectus, autem rem facilis cumque sunt minus.
+          <p class="contents-lead">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo a doloribus quam consequatur reprehenderit, iure explicabo consequuntur, sequi ratione maiores expedita officiis delectus, autem rem facilis cumque sunt minus.
+          </p>
         </div>
         <div class="tertiaryBlock__contents--right">
           <div class="tagCanvasContainer" id="tagCanvasContainer">
@@ -154,25 +156,31 @@ export default {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-start;
+
   &__name {
+    
     &--greet {
       font-size: 16px;
     }
+
     &--title {
       font-size: 40px;
     }
   }
+
   &__position {
     margin: 24px 0 48px;
     font-size: 12px;
     color: $text-color-secondary;
   }
+
   &__btn {
     transition: 0.2s;
     &:hover {
       opacity: 0.6;
     }
   }
+
   &__scrollBar {
     position: absolute;
     right: 12px;
@@ -180,6 +188,7 @@ export default {
     width: 21px;
     height: 65px;
     overflow: hidden;
+
     &--bar {
       position: absolute;
       top: 10px;
@@ -189,6 +198,7 @@ export default {
       background-image: url('/scroll_bar.png');
       background-size: 100% 100%;
     }
+
     &--dot {
       position: absolute;
       top: 0;
@@ -200,54 +210,55 @@ export default {
       animation:1s ease-out infinite scrollDotAnimation;
     }
   }
+
   @include mq() {
     &__name {
+
       &--greet {
         font-size: 24px;
       }
+
       &--title {
         font-size: 60px;
       }
     }
+
     &__position {
       font-size: 18px;
     }
   }
-}
-@keyframes scrollDotAnimation {
-	0% {
-    transform:translateY(-50px);
-  }
-	30% {
-    transform:translateY(-50px);
-  }
-	100% {
-    transform:translateY(66px);
-  }
-}
-.headSet {
-  width: 267px;
-  margin: 16px auto 4px;
-  font-size: 40px;
-  letter-spacing: 1px;
-  span:nth-of-type(2) {
-    left: -1px;
-  }
-  span:nth-of-type(3) {
-    left: 1px;
-  }
-  strong {
-    display: inline-block;
-    margin-left: -8px;
-  }
-  @include mq() {
-    width: 520px;
-    font-size: 80px;
+
+  .headSet {
+    width: 267px;
+    margin: 16px auto 4px;
+    font-size: 40px;
+    letter-spacing: 1px;
+
+    span:nth-of-type(2) {
+      left: -1px;
+    }
+
+    span:nth-of-type(3) {
+      left: 1px;
+    }
+
     strong {
-      margin-left: -16px;
+      display: inline-block;
+      margin-left: -8px;
+    }
+
+    @include mq() {
+      width: 520px;
+      font-size: 80px;
+
+      strong {
+        margin-left: -16px;
+      }
     }
   }
+
 }
+
 .titEffect {
   backface-visibility: hidden;
   transition: all .8s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
@@ -257,43 +268,60 @@ export default {
   position: relative;
   opacity: 0;
 }
-// .titEffect__detail {
-//   display: inline-block;
-//   opacity: 0;
-// }
-// .titEffect__clone, .titEffect__cover {
-//   display: block;
-//   overflow: hidden;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%
-// }
-// .titEffect__cover {
-//   opacity: 0.25;
-// }
+
 .titEffect-visible {
   transform: translateX(0);
   opacity: 1;
 }
-// .titEffect-animated .titEffect__detail {
-//   opacity: 1;
-// }
-
 
 // tertiaryBlock
 .tertiaryBlock {
-  font-family: $font-base-bold;
+  margin-bottom: 48px;
+
+  .headSet {
+    width: 342px;
+    margin-bottom: 24px;
+    font-size: 32px;
+    letter-spacing: 1px;
+
+    span:nth-of-type(2) {
+      left: -1px;
+    }
+
+    span:nth-of-type(3) {
+      left: 1px;
+    }
+  }
 
   &__contents {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
+
+    &--left {
+      margin-bottom: 24px;
+      .contents-lead {
+        line-height: 1.5;
+        font-size: 16px;
+      } 
+    }
+
+    &--right {
+      margin: -48px auto;
+    }
+  }
+
+  @include mq() {
+    
+    &__contents {
+      flex-flow: row nowrap;
+    }
   }
 }
 
 .tagCanvasContainer {
+  font-family: $font-base-bold !important;
 
   .myCanvas {
     max-width: 500px;
@@ -303,8 +331,7 @@ export default {
   }
 }
 
-p {
-  font-size: 32px !important;
-}
 
+
+// dummyblock
 </style>
