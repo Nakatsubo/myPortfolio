@@ -47,10 +47,12 @@
         <span>SKILLS & EXPERIENCE</span>
       </div>
       <div class="tertiaryBlock__contents">
-        <div class="tertiaryBlock__contents--left"></div>
+        <div class="tertiaryBlock__contents--left">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo a doloribus quam consequatur reprehenderit, iure explicabo consequuntur, sequi ratione maiores expedita officiis delectus, autem rem facilis cumque sunt minus.
+        </div>
         <div class="tertiaryBlock__contents--right">
-          <div class="tagCanvasContainer">
-            <canvas width="500" height="500" id="myCanvas">
+          <div class="tagCanvasContainer" id="tagCanvasContainer">
+            <canvas id="myCanvas" class="myCanvas" width="500" height="500">
               <ul>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank">HTML</a></li>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/CSS" target="_blank">CSS</a></li>
@@ -106,10 +108,17 @@ export default {
       viewWindowWidth = window.innerWidth
       this.$setFillHeight()
     })
-    this.tagCanvas()
+
+    let color = this.randomIntFromInterval(1, 2)
+    color === 1 ? color = 'hsla(190, 100%, 50%)' : color = 'hsla(340, 100%, 50%)'
+    this.tagCanvas(color)
   },
   methods: {
-    tagCanvas() {
+    randomIntFromInterval(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    
+    tagCanvas(color) {
       let options = {
           depth: 1.1,
           fadeIn: 3000,
@@ -118,21 +127,24 @@ export default {
           initial: [0.3, -0.1],
           maxSpeed: 0.06,
           noSelect: true,
+          outlineThickness : 0.5,
           shuffleTags: true,
           shape: 'sphere',
-          textColour: '#000000',
-          textFont: null,
+          textColour: color,
+          textFont: 'HelveticaNeue-CondensedBold',
           zoom: 0.8,
           pinchZoom: true,
           wheelZoom: false,
       }
       TagCanvas.Start('myCanvas', '', options);
-    }
+    },
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
+// primaryBlock
 .primaryBlock {
   width: 100%;
   height: 100%;
@@ -267,7 +279,32 @@ export default {
 // .titEffect-animated .titEffect__detail {
 //   opacity: 1;
 // }
+
+
+// tertiaryBlock
+.tertiaryBlock {
+  font-family: $font-base-bold;
+
+  &__contents {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.tagCanvasContainer {
+
+  .myCanvas {
+    max-width: 500px;
+    width: 100%;
+    max-height: 500px;
+    height: 100%;
+  }
+}
+
 p {
   font-size: 32px !important;
 }
+
 </style>
