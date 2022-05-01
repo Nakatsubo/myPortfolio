@@ -1,5 +1,6 @@
 <template>
   <div class="root__main--container">
+
     <div class="primaryBlock">
       <div class="primaryBlock__name">
         <div class="primaryBlock__name--greet textEn textEn-small">
@@ -37,6 +38,57 @@
       </div>
     </div>
 
+    <div class="secondaryBlock"></div>
+
+    <div class="tertiaryBlock">
+      <div class="tertiaryBlock__heading headSet">
+        <span>SKILLS & EXPERIENCE</span>
+        <span>SKILLS & EXPERIENCE</span>
+        <span>SKILLS & EXPERIENCE</span>
+      </div>
+      <div class="tertiaryBlock__contents">
+        <div class="tertiaryBlock__contents--left">
+          <p class="contents-lead">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo a doloribus quam consequatur reprehenderit, iure explicabo consequuntur, sequi ratione maiores expedita officiis delectus, autem rem facilis cumque sunt minus.
+          </p>
+        </div>
+        <div class="tertiaryBlock__contents--right">
+          <div class="tagCanvasContainer" id="tagCanvasContainer">
+            <canvas id="myCanvas" class="myCanvas" width="500" height="500">
+              <ul>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank">HTML</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/CSS" target="_blank">CSS</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Sass" target="_blank">Sass</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JavaScript" target="_blank">ES5/ES6</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JQuery" target="_blank">jQuery</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Node.js" target="_blank">Node.js</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Vue.js" target="_blank">Vue.js</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Nuxt.js" target="_blank">Nuxt.js</a></li>
+                <li><a data-weight="20" href="#" target="_blank">Gulp.js</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/JavaScript_Object_Notation" target="_blank">JSON</a></li>
+                <li><a data-weight="16" href="#" target="_blank">GSAP</a></li>
+                <li><a data-weight="16" href="https://ja.wikipedia.org/wiki/Google_Apps_Script" target="_blank">Google Apps Script</a></li>
+                <li><a data-weight="16" href="#" target="_blank">JAM STACK</a></li>
+                <li><a data-weight="12" href="https://ja.wikipedia.org/wiki/Webpack" target="_blank">webpack</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/WordPress" target="_blank">WordPress</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/Movable_Type" target="_blank">Movable Type</a></li>
+                <li><a data-weight="20" href="hhttps://ja.wikipedia.org/wiki/PHP_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" target="_blank">PHP</a></li>
+                <li><a data-weight="16" href="https://ja.wikipedia.org/wiki/Ruby" target="_blank">Ruby</a></li>
+                <li><a data-weight="16" href="https://ja.wikipedia.org/wiki/Ruby_on_Rails" target="_blank">Ruby on Rails</a></li>
+                <li><a data-weight="26" href="https://ja.wikipedia.org/wiki/SQL" target="_blank">SQL</a></li>
+                <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Git" target="_blank">Git</a></li>
+                <li><a data-weight="16" href="hhttps://ja.wikipedia.org/wiki/Docker" target="_blank">Docker</a></li>
+                <li><a data-weight="12" href="https://ja.wikipedia.org/wiki/Python" target="_blank">Python</a></li>
+              </ul>
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quaternaryBlock"></div>
+
     <div class="dummy-box">
       <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <p class="dummy">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -51,24 +103,50 @@
 export default {
   name: 'IndexPage',
   mounted() {
-    this.setFillHeight()
+    this.$setFillHeight()
     let viewWindowWidth = window.innerWidth
     window.addEventListener('resize', () => {
       if (viewWindowWidth === window.innerWidth) return
       viewWindowWidth = window.innerWidth
-      this.setFillHeight()
+      this.$setFillHeight()
     })
+
+    let color = this.randomIntFromInterval(1, 2)
+    color === 1 ? color = 'hsla(190, 100%, 50%)' : color = 'hsla(340, 100%, 50%)'
+    this.tagCanvas(color)
   },
   methods: {
-    setFillHeight() {
-      const VIEW_WINDOW_HEIGHT = window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--vh', ''.concat(VIEW_WINDOW_HEIGHT, 'px'))
+    randomIntFromInterval(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
     },
+    
+    tagCanvas(color) {
+      let options = {
+          depth: 1.1,
+          fadeIn: 3000,
+          freezeActive: true,
+          freezeDecel: true,
+          initial: [0.3, -0.1],
+          maxSpeed: 0.06,
+          noSelect: true,
+          outlineThickness : 0.5,
+          shuffleTags: true,
+          shape: 'sphere',
+          textColour: color,
+          textFont: 'HelveticaNeue-CondensedBold',
+          zoom: 0.8,
+          pinchZoom: true,
+          wheelZoom: false,
+      }
+      TagCanvas.Start('myCanvas', '', options);
+    },
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
+// primaryBlock
 .primaryBlock {
   width: 100%;
   height: 100%;
@@ -78,25 +156,31 @@ export default {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: flex-start;
+
   &__name {
+    
     &--greet {
       font-size: 16px;
     }
+
     &--title {
       font-size: 40px;
     }
   }
+
   &__position {
     margin: 24px 0 48px;
     font-size: 12px;
     color: $text-color-secondary;
   }
+
   &__btn {
     transition: 0.2s;
     &:hover {
       opacity: 0.6;
     }
   }
+
   &__scrollBar {
     position: absolute;
     right: 12px;
@@ -104,6 +188,7 @@ export default {
     width: 21px;
     height: 65px;
     overflow: hidden;
+
     &--bar {
       position: absolute;
       top: 10px;
@@ -113,6 +198,7 @@ export default {
       background-image: url('/scroll_bar.png');
       background-size: 100% 100%;
     }
+
     &--dot {
       position: absolute;
       top: 0;
@@ -124,54 +210,55 @@ export default {
       animation:1s ease-out infinite scrollDotAnimation;
     }
   }
+
   @include mq() {
     &__name {
+
       &--greet {
         font-size: 24px;
       }
+
       &--title {
         font-size: 60px;
       }
     }
+
     &__position {
       font-size: 18px;
     }
   }
-}
-@keyframes scrollDotAnimation {
-	0% {
-    transform:translateY(-50px);
-  }
-	30% {
-    transform:translateY(-50px);
-  }
-	100% {
-    transform:translateY(66px);
-  }
-}
-.headSet {
-  width: 267px;
-  margin: 16px auto 4px;
-  font-size: 40px;
-  letter-spacing: 1px;
-  span:nth-of-type(2) {
-    left: -1px;
-  }
-  span:nth-of-type(3) {
-    left: 1px;
-  }
-  strong {
-    display: inline-block;
-    margin-left: -8px;
-  }
-  @include mq() {
-    width: 520px;
-    font-size: 80px;
+
+  .headSet {
+    width: 267px;
+    margin: 16px auto 4px;
+    font-size: 40px;
+    letter-spacing: 1px;
+
+    span:nth-of-type(2) {
+      left: -1px;
+    }
+
+    span:nth-of-type(3) {
+      left: 1px;
+    }
+
     strong {
-      margin-left: -16px;
+      display: inline-block;
+      margin-left: -8px;
+    }
+
+    @include mq() {
+      width: 520px;
+      font-size: 80px;
+
+      strong {
+        margin-left: -16px;
+      }
     }
   }
+
 }
+
 .titEffect {
   backface-visibility: hidden;
   transition: all .8s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
@@ -181,29 +268,70 @@ export default {
   position: relative;
   opacity: 0;
 }
-// .titEffect__detail {
-//   display: inline-block;
-//   opacity: 0;
-// }
-// .titEffect__clone, .titEffect__cover {
-//   display: block;
-//   overflow: hidden;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%
-// }
-// .titEffect__cover {
-//   opacity: 0.25;
-// }
+
 .titEffect-visible {
   transform: translateX(0);
   opacity: 1;
 }
-// .titEffect-animated .titEffect__detail {
-//   opacity: 1;
-// }
-p {
-  font-size: 32px !important;
+
+// tertiaryBlock
+.tertiaryBlock {
+  margin-bottom: 48px;
+
+  .headSet {
+    width: 342px;
+    margin-bottom: 24px;
+    font-size: 32px;
+    letter-spacing: 1px;
+
+    span:nth-of-type(2) {
+      left: -1px;
+    }
+
+    span:nth-of-type(3) {
+      left: 1px;
+    }
+  }
+
+  &__contents {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    &--left {
+      margin-bottom: 24px;
+      .contents-lead {
+        line-height: 1.5;
+        font-size: 16px;
+      } 
+    }
+
+    &--right {
+      margin: -48px auto;
+    }
+  }
+
+  @include mq() {
+    
+    &__contents {
+      flex-flow: row nowrap;
+    }
+  }
 }
+
+.tagCanvasContainer {
+  font-family: $font-base-bold !important;
+
+  .myCanvas {
+    max-width: 500px;
+    width: 100%;
+    max-height: 500px;
+    height: 100%;
+  }
+}
+
+
+
+// dummyblock
 </style>

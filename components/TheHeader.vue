@@ -174,7 +174,7 @@ export default {
     font-family: $font-base-bold;
     font-size: 12px;
     color: $base-color-primary;
-    letter-spacing: 1px;
+    // letter-spacing: 1px;
   }
   &__menu {
     position: absolute;

@@ -91,7 +91,7 @@ export default {
       let titEffects = document.getElementsByClassName('titEffect')
       this.firstViewAnimation(titEffects)
     })
-    this.$oscillator(false)
+    this.$mouseStalker(false)
     setInterval(this.randambackgroundPosition, 100)
   },
   methods: {
