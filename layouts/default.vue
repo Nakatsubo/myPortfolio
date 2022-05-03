@@ -22,6 +22,13 @@
 </template>
 
 <script>
+// gsap
+// import { gsap } from 'gsap';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// if (process.client) {
+//   gsap.registerPlugin(ScrollTrigger)
+// }
+
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'default',

@@ -46,17 +46,17 @@
         <span>SKILLS & EXPERIENCE</span>
         <span>SKILLS & EXPERIENCE</span>
       </div>
-      <div class="tertiaryBlock__contents">
-        <div class="tertiaryBlock__contents--left">
+      <div class="tertiaryBlock__contents parent">
+        <div class="tertiaryBlock__contents--left scroll-bottom-up">
           <p class="contents-lead">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo a doloribus quam consequatur reprehenderit, iure explicabo consequuntur, sequi ratione maiores expedita officiis delectus, autem rem facilis cumque sunt minus.
           </p>
         </div>
-        <div class="tertiaryBlock__contents--right">
+        <div class="tertiaryBlock__contents--right scroll-bottom-up">
           <div class="tagCanvasContainer" id="tagCanvasContainer">
-            <canvas id="myCanvas" class="myCanvas" width="500" height="500">
+            <canvas id="myCanvas" class="myCanvas" width="400" height="400">
               <ul>
-                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank">HTML</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank" class="headSet">HTML</a></li>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/CSS" target="_blank">CSS</a></li>
                 <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Sass" target="_blank">Sass</a></li>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a></li>
@@ -100,6 +100,13 @@
 </template>
 
 <script>
+// gsap
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+if (process.client) {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
 export default {
   name: 'IndexPage',
   mounted() {
@@ -113,7 +120,10 @@ export default {
 
     let color = this.randomIntFromInterval(1, 2)
     color === 1 ? color = 'hsla(190, 100%, 50%)' : color = 'hsla(340, 100%, 50%)'
+    // let color = '#838383';
     this.tagCanvas(color)
+
+    this.scrollBottomUp()
   },
   methods: {
     randomIntFromInterval(min, max) {
@@ -141,6 +151,24 @@ export default {
       TagCanvas.Start('myCanvas', '', options);
     },
 
+    scrollBottomUp() {
+      gsap.fromTo('.scroll-bottom-up', { //アニメーションしたい要素を指定
+        y: 50,
+        autoAlpha: 0
+      },
+      {
+        y: 0,
+        autoAlpha: 1,
+        delay: 0.6,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.parent',//アニメーションが始まるトリガーとなる要素
+          start: 'top 90%', //アニメーションが始まる位置を指定
+          markers: true,
+        }
+      })
+    },
   }
 }
 </script>
@@ -152,6 +180,7 @@ export default {
   height: 100%;
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
+  padding: 0 24px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -175,6 +204,8 @@ export default {
   }
 
   &__btn {
+    // border-radius: 25px;
+    // background: $base-color-secondary;
     transition: 0.2s;
     &:hover {
       opacity: 0.6;
@@ -183,7 +214,7 @@ export default {
 
   &__scrollBar {
     position: absolute;
-    right: 12px;
+    right: 24px;
     bottom: 12px;
     width: 21px;
     height: 65px;
@@ -213,6 +244,7 @@ export default {
 
   @include mq() {
     &__name {
+      padding-left: 24px;
 
       &--greet {
         font-size: 24px;
@@ -224,7 +256,12 @@ export default {
     }
 
     &__position {
+      padding-left: 24px;
       font-size: 18px;
+    }
+
+    &__btn {
+      padding-left: 24px;
     }
   }
 
@@ -278,29 +315,17 @@ export default {
 .tertiaryBlock {
   margin-bottom: 48px;
 
-  .headSet {
-    width: 342px;
-    margin-bottom: 24px;
-    font-size: 32px;
-    letter-spacing: 1px;
-
-    span:nth-of-type(2) {
-      left: -1px;
-    }
-
-    span:nth-of-type(3) {
-      left: 1px;
-    }
-  }
-
   &__contents {
+    padding: 48px 24px;
+    margin-top: -72px;
+    background-color: $base-color-tertiary;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
 
     &--left {
-      margin-bottom: 24px;
+      margin-bottom: 48px;
       .contents-lead {
         line-height: 1.5;
         font-size: 16px;
@@ -313,21 +338,69 @@ export default {
   }
 
   @include mq() {
-    
+    padding: 0 24px;
+
     &__contents {
+      padding: 120px 24px;
+      margin-top: -96px;
       flex-flow: row nowrap;
+
+      &--left {
+        width: calc(100% - 440px);
+        margin-bottom: 0;
+      }
+
+      &--right {
+        margin: -152px 0;
+      }
     }
   }
+
+  .headSet {
+    width: 321px;
+    padding-left: 24px;
+    margin-bottom: 40px;
+    font-size: 32px;
+    letter-spacing: 1px;
+
+    span:nth-of-type(2) {
+      left: 23px;
+    }
+
+    span:nth-of-type(3) {
+      left: 25px;
+    }
+
+    @include mq() {
+      width: 248px;
+      padding-left: 24px;
+      font-size: 60px;
+
+      span:nth-of-type(2) {
+        left: 23px;
+      }
+
+      span:nth-of-type(3) {
+        left: 25px;
+      }
+    }
+  }
+  
 }
 
 .tagCanvasContainer {
   font-family: $font-base-bold !important;
 
   .myCanvas {
-    max-width: 500px;
+    max-width: 600px;
     width: 100%;
-    max-height: 500px;
+    max-height: 600px;
     height: 100%;
+  }
+
+  @include mq() {
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 

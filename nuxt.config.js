@@ -47,6 +47,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ['gsap']
   },
 
   // Customize Settings
@@ -55,7 +56,10 @@ export default {
     hoistUseStatements: true,
   },
   gsap: {
-    extraPlugins: {},
+    extraPlugins: {
+      scrollTo: true,
+      scrollTrigger: true
+    },
     extraEases: {
       expoScaleEase: true
     },

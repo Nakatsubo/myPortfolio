@@ -52,6 +52,13 @@
 </template>
 
 <script>
+// gsap
+// import { gsap } from 'gsap';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// if (process.client) {
+//   gsap.registerPlugin(ScrollTrigger)
+// }
+
 export default {
   name: 'TheHeader',
   computed: {
@@ -164,12 +171,12 @@ export default {
   left: 0;
   width: 100%;
   height: 1px;
-  z-index: 1;
+  z-index: 2;
   &__logo {
     position: absolute;
     top: 12px;
     left: 12px;
-    padding: 5px 10px;
+    padding: 5px 15px;
     background-color: $base-color-secondary;
     font-family: $font-base-bold;
     font-size: 12px;
@@ -204,7 +211,8 @@ export default {
   @include mq() {
     &__logo {
       // padding: 10px 15px;
-      font-size: 2vw;
+      left: 24px;
+      font-size: 24px;
     }
     &__menu {
       top: 24px;
