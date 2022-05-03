@@ -56,7 +56,7 @@
           <div class="tagCanvasContainer" id="tagCanvasContainer">
             <canvas id="myCanvas" class="myCanvas" width="400" height="400">
               <ul>
-                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank">HTML</a></li>
+                <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank" class="headSet">HTML</a></li>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/CSS" target="_blank">CSS</a></li>
                 <li><a data-weight="20" href="https://ja.wikipedia.org/wiki/Sass" target="_blank">Sass</a></li>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a></li>
@@ -113,6 +113,7 @@ export default {
 
     let color = this.randomIntFromInterval(1, 2)
     color === 1 ? color = 'hsla(190, 100%, 50%)' : color = 'hsla(340, 100%, 50%)'
+    // let color = '#838383';
     this.tagCanvas(color)
   },
   methods: {
@@ -152,6 +153,7 @@ export default {
   height: 100%;
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
+  padding: 0 24px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -175,8 +177,8 @@ export default {
   }
 
   &__btn {
-    border-radius: 25px;
-    background: $base-color-secondary;
+    // border-radius: 25px;
+    // background: $base-color-secondary;
     transition: 0.2s;
     &:hover {
       opacity: 0.6;
@@ -185,7 +187,7 @@ export default {
 
   &__scrollBar {
     position: absolute;
-    right: 12px;
+    right: 24px;
     bottom: 12px;
     width: 21px;
     height: 65px;
@@ -215,6 +217,7 @@ export default {
 
   @include mq() {
     &__name {
+      padding-left: 24px;
 
       &--greet {
         font-size: 24px;
@@ -226,7 +229,12 @@ export default {
     }
 
     &__position {
+      padding-left: 24px;
       font-size: 18px;
+    }
+
+    &__btn {
+      padding-left: 24px;
     }
   }
 
@@ -281,13 +289,16 @@ export default {
   margin-bottom: 48px;
 
   &__contents {
+    padding: 48px 24px;
+    margin-top: -72px;
+    background-color: $base-color-tertiary;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
 
     &--left {
-      margin-bottom: 24px;
+      margin-bottom: 48px;
       .contents-lead {
         line-height: 1.5;
         font-size: 16px;
@@ -300,7 +311,11 @@ export default {
   }
 
   @include mq() {
+    padding: 0 24px;
+
     &__contents {
+      padding: 120px 24px;
+      margin-top: -96px;
       flex-flow: row nowrap;
 
       &--left {
@@ -315,22 +330,32 @@ export default {
   }
 
   .headSet {
-    width: 342px;
-    margin-bottom: 24px;
+    width: 321px;
+    padding-left: 24px;
+    margin-bottom: 40px;
     font-size: 32px;
     letter-spacing: 1px;
 
     span:nth-of-type(2) {
-      left: -1px;
+      left: 23px;
     }
 
     span:nth-of-type(3) {
-      left: 1px;
+      left: 25px;
     }
 
     @include mq() {
-      width: 224px;
+      width: 248px;
+      padding-left: 24px;
       font-size: 60px;
+
+      span:nth-of-type(2) {
+        left: 23px;
+      }
+
+      span:nth-of-type(3) {
+        left: 25px;
+      }
     }
   }
   

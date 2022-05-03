@@ -164,7 +164,7 @@ export default {
   left: 0;
   width: 100%;
   height: 1px;
-  z-index: 1;
+  z-index: 2;
   &__logo {
     position: absolute;
     top: 12px;
@@ -204,6 +204,7 @@ export default {
   @include mq() {
     &__logo {
       // padding: 10px 15px;
+      left: 24px;
       font-size: 24px;
     }
     &__menu {
