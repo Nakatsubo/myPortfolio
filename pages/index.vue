@@ -46,13 +46,13 @@
         <span>SKILLS & EXPERIENCE</span>
         <span>SKILLS & EXPERIENCE</span>
       </div>
-      <div class="tertiaryBlock__contents">
-        <div class="tertiaryBlock__contents--left">
+      <div class="tertiaryBlock__contents parent">
+        <div class="tertiaryBlock__contents--left scroll-bottom-up">
           <p class="contents-lead">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem illo a doloribus quam consequatur reprehenderit, iure explicabo consequuntur, sequi ratione maiores expedita officiis delectus, autem rem facilis cumque sunt minus.
           </p>
         </div>
-        <div class="tertiaryBlock__contents--right">
+        <div class="tertiaryBlock__contents--right scroll-bottom-up">
           <div class="tagCanvasContainer" id="tagCanvasContainer">
             <canvas id="myCanvas" class="myCanvas" width="400" height="400">
               <ul>
@@ -100,6 +100,13 @@
 </template>
 
 <script>
+// gsap
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+if (process.client) {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
 export default {
   name: 'IndexPage',
   mounted() {
@@ -115,6 +122,8 @@ export default {
     color === 1 ? color = 'hsla(190, 100%, 50%)' : color = 'hsla(340, 100%, 50%)'
     // let color = '#838383';
     this.tagCanvas(color)
+
+    this.scrollBottomUp()
   },
   methods: {
     randomIntFromInterval(min, max) {
@@ -142,6 +151,24 @@ export default {
       TagCanvas.Start('myCanvas', '', options);
     },
 
+    scrollBottomUp() {
+      gsap.fromTo('.scroll-bottom-up', { //アニメーションしたい要素を指定
+        y: 50,
+        autoAlpha: 0
+      },
+      {
+        y: 0,
+        autoAlpha: 1,
+        delay: 0.6,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.parent',//アニメーションが始まるトリガーとなる要素
+          start: 'top 90%', //アニメーションが始まる位置を指定
+          markers: true,
+        }
+      })
+    },
   }
 }
 </script>
