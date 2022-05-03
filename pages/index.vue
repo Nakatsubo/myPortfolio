@@ -54,7 +54,7 @@
         </div>
         <div class="tertiaryBlock__contents--right">
           <div class="tagCanvasContainer" id="tagCanvasContainer">
-            <canvas id="myCanvas" class="myCanvas" width="500" height="500">
+            <canvas id="myCanvas" class="myCanvas" width="400" height="400">
               <ul>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" target="_blank">HTML</a></li>
                 <li><a data-weight="24" href="https://ja.wikipedia.org/wiki/CSS" target="_blank">CSS</a></li>
@@ -175,6 +175,8 @@ export default {
   }
 
   &__btn {
+    border-radius: 25px;
+    background: $base-color-secondary;
     transition: 0.2s;
     &:hover {
       opacity: 0.6;
@@ -278,21 +280,6 @@ export default {
 .tertiaryBlock {
   margin-bottom: 48px;
 
-  .headSet {
-    width: 342px;
-    margin-bottom: 24px;
-    font-size: 32px;
-    letter-spacing: 1px;
-
-    span:nth-of-type(2) {
-      left: -1px;
-    }
-
-    span:nth-of-type(3) {
-      left: 1px;
-    }
-  }
-
   &__contents {
     display: flex;
     flex-flow: column nowrap;
@@ -313,21 +300,55 @@ export default {
   }
 
   @include mq() {
-    
     &__contents {
       flex-flow: row nowrap;
+
+      &--left {
+        width: calc(100% - 440px);
+        margin-bottom: 0;
+      }
+
+      &--right {
+        margin: -152px 0;
+      }
     }
   }
+
+  .headSet {
+    width: 342px;
+    margin-bottom: 24px;
+    font-size: 32px;
+    letter-spacing: 1px;
+
+    span:nth-of-type(2) {
+      left: -1px;
+    }
+
+    span:nth-of-type(3) {
+      left: 1px;
+    }
+
+    @include mq() {
+      width: 224px;
+      font-size: 60px;
+    }
+  }
+  
 }
 
 .tagCanvasContainer {
   font-family: $font-base-bold !important;
 
   .myCanvas {
-    max-width: 500px;
+    max-width: 600px;
     width: 100%;
-    max-height: 500px;
+    max-height: 600px;
     height: 100%;
+  }
+
+  @include mq() {
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 

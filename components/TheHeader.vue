@@ -169,7 +169,7 @@ export default {
     position: absolute;
     top: 12px;
     left: 12px;
-    padding: 5px 10px;
+    padding: 5px 15px;
     background-color: $base-color-secondary;
     font-family: $font-base-bold;
     font-size: 12px;
@@ -204,7 +204,7 @@ export default {
   @include mq() {
     &__logo {
       // padding: 10px 15px;
-      font-size: 2vw;
+      font-size: 24px;
     }
     &__menu {
       top: 24px;
